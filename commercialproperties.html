@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Properties for Rent & Sale | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .search-bar {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .search-bar input, .search-bar select {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            flex: 1 1 200px;
+        }
+
+        .search-bar button {
+            padding: 12px 25px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #d9b252;
+            transform: translateY(-2px);
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-image {
+            height: 250px;
+            position: relative;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-info h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .property-location i {
+            color: var(--primary);
+        }
+
+        .property-features {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .feature i {
+            color: var(--primary);
+        }
+
+        .property-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .property-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #777;
+        }
+
+        .property-link {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .property-link:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+        }
+
+        .property-types {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: 200px;
+        }
+
+        .type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .type-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .type-card h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .type-card p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .cta-section {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border-radius: 5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #d9b252;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .property-types {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Premium Commercial Properties</h1>
+        <p>Find the perfect space for your business with Kenya's leading commercial real estate platform</p>
+        <div class="search-bar">
+            <form>
+                <select>
+                    <option value="">Property Type</option>
+                    <option value="office">Office Space</option>
+                    <option value="retail">Retail Space</option>
+                    <option value="warehouse">Warehouse</option>
+                    <option value="land">Commercial Land</option>
+                </select>
+                <select>
+                    <option value="">Location</option>
+                    <option value="nairobi">Nairobi</option>
+                    <option value="mombasa">Mombasa</option>
+                    <option value="kisumu">Kisumu</option>
+                    <option value="nakuru">Nakuru</option>
+                </select>
+                <select>
+                    <option value="">Price Range</option>
+                    <option value="0-50000">KES 0 - 50,000</option>
+                    <option value="50000-200000">KES 50,000 - 200,000</option>
+                    <option value="200000-500000">KES 200,000 - 500,000</option>
+                    <option value="500000+">KES 500,000+</option>
+                </select>
+                <button type="submit"><i class="fas fa-search"></i> Search</button>
+            </form>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="renting.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="propertylisting.html" class="nav-link">Home</a>
+                <a href="residential.html" class="nav-link">Residential</a>
+                <a href="commercialproperties.html" class="nav-link active">Commercial</a>
+                <a href="agents.html" class="nav-link">Agents</a>
+                <a href="https://wa.me/+254796538128" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">Featured Commercial Properties</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Modern office space">
+                    <span class="property-badge">For Lease</span>
+                </div>
+                <div class="property-info">
+                    <h3>Westlands Office Suite</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Westlands, Nairobi
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-arrows-alt"></i> 2,500 sq.ft
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-door-open"></i> 6 Offices
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i> Parking
+                        </div>
+                    </div>
+                    <div class="property-price">KES 250,000 <span>/month</span></div>
+                    <a href="commercialpropdetails.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Commercial building">
+                    <span class="property-badge">For Sale</span>
+                </div>
+                <div class="property-info">
+                    <h3>CBD Commercial Building</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Nairobi CBD
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-building"></i> 5 Floors
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-arrows-alt"></i> 15,000 sq.ft
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-elevator"></i> Elevator
+                        </div>
+                    </div>
+                    <div class="property-price">KES 85,000,000</div>
+                    <a href="commercialpropdetails.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Retail space">
+                    <span class="property-badge">For Lease</span>
+                </div>
+                <div class="property-info">
+                    <h3>Karen Retail Space</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Karen, Nairobi
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-store"></i> Ground Floor
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-arrows-alt"></i> 1,200 sq.ft
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i> Restaurant Ready
+                        </div>
+                    </div>
+                    <div class="property-price">KES 180,000 <span>/month</span></div>
+                    <a href="commercialpropdetails.html" class="property-link">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Find by Property Type</h2>
+        <div class="property-types">
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Office Spaces</h3>
+                <p>Executive suites, coworking spaces, and corporate offices</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>Retail Spaces</h3>
+                <p>Shops, restaurants, malls, and showrooms</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-warehouse"></i>
+                </div>
+                <h3>Warehouses</h3>
+                <p>Storage, distribution centers, and industrial spaces</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Commercial Land</h3>
+                <p>Prime locations for development and investment</p>
+            </div>
+        </div>
+
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Warehouse space">
+                    <span class="property-badge">For Lease</span>
+                </div>
+                <div class="property-info">
+                    <h3>Industrial Warehouse</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Mombasa Road
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-arrows-alt"></i> 10,000 sq.ft
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-truck"></i> Loading Dock
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i> 24/7 Security
+                        </div>
+                    </div>
+                    <div class="property-price">KES 350,000 <span>/month</span></div>
+                    <a href="commercialpropdetails.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Office space">
+                    <span class="property-badge">For Lease</span>
+                </div>
+                <div class="property-info">
+                    <h3>Serviced Offices</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Upper Hill
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-desktop"></i> Furnished
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-arrows-alt"></i> 800-1,500 sq.ft
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i> High-Speed Internet
+                        </div>
+                    </div>
+                    <div class="property-price">KES 120,000 <span>/month</span></div>
+                    <a href="commercialpropdetails.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Commercial land">
+                    <span class="property-badge">For Sale</span>
+                </div>
+                <div class="property-info">
+                    <h3>Prime Commercial Land</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Kiambu Road
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i> 1 Acre
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-road"></i> Road Access
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tint"></i> Water Available
+                        </div>
+                    </div>
+                    <div class="property-price">KES 25,000,000</div>
+                    <a href="commercialpropdetails.html" class="property-link">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <div class="cta-content">
+            <h2>List Your Commercial Property With Us</h2>
+            <p>Reach thousands of potential tenants and buyers with our premium listing services. Our expert agents will help you get the best value for your property.</p>
+            <a href="https://wa.me/+254796538128" class="cta-button">Contact Our Team</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Commercial Real Estate Services</h2>
+        <div class="property-types">
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-search-dollar"></i>
+                </div>
+                <h3>Property Valuation</h3>
+                <p>Professional valuation services for commercial properties</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                <h3>Lease Negotiation</h3>
+                <p>Expert negotiation for favorable lease terms</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Tenant Representation</h3>
+                <p>Find the perfect space for your business needs</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Investment Advisory</h3>
+                <p>Data-driven insights for commercial real estate investors</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Kenya's premier commercial real estate platform connecting businesses with premium properties since 2015.</p>
+                <div class="social-links">
+                <a href="https://web.facebook.com/abiola.mashood.5245" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/abiolamashood10" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/mashrichvik/?next=%2F" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="propertylisting.html">Home</a></li>
+                    <li><a href="residential.html">Residential</a></li>
+                    <li><a href="commercialproperties.html">Commercial</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="https://wa.me/+254796538128">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Plaza, Kisumu-Maseno rd, Kisumu</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 796538128</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@crenrentals.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 cREN Commercial Real Estate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Property search functionality
+        document.querySelector('.search-bar form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would filter properties
+            alert('Search functionality would filter properties here');
+        });
+
+        // Property card hover effects
+        const propertyCards = document.querySelectorAll('.property-card');
+        propertyCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.15)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .confirmation-container {
+            background-color: white;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .confirmation-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .confirmation-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 36px;
+            animation: bounce 1s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        h1 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .confirmation-message {
+            margin-bottom: 25px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .booking-details {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        .detail-value {
+            color: #333;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(42, 157, 143, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+        }
+
+        .receipt-note {
+            margin-top: 25px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .contact-support {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 14px;
+        }
+
+        .contact-support a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            .confirmation-container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        
+        <h1>Booking Confirmed!</h1>
+        
+        <p class="confirmation-message" id="confirmation-message">
+            <!-- Will be filled by JavaScript -->
+        </p>
+        
+        <div class="booking-details">
+            <div class="detail-row">
+                <span class="detail-label">Booking Reference:</span>
+                <span class="detail-value" id="booking-ref">CREN-<span id="year"></span>-<span id="random-number"></span></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Property:</span>
+                <span class="detail-value">cREN Apartments</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Check-in:</span>
+                <span class="detail-value" id="checkin-date">June 15, 2023</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Check-out:</span>
+                <span class="detail-value" id="checkout-date">June 30, 2023</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Guests:</span>
+                <span class="detail-value">Family</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Email:</span>
+                <span class="detail-value" id="user-email">john.doe@example.com</span>
+            </div>
+        </div>
+        
+        <div class="total-amount">$1,200.00</div>
+        
+        <a href="#" class="btn btn-primary" id="download-receipt">
+            <i class="fas fa-download"></i> Download Receipt
+        </a>
+        
+        <a href="propertylisting.html" class="btn btn-secondary">
+            <i class="fas fa-home"></i> Browse More Properties
+        </a>
+        
+        <p class="receipt-note">
+            Your receipt and booking details have been sent to <strong id="receipt-email">john.doe@example.com</strong>. 
+            Please check your spam folder if you don't see it within 5 minutes.
+        </p>
+        
+        <div class="contact-support">
+            Need help? <a href="https://wa.me/+254796538128">Contact our support team</a> for assistance.
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters (simulating data passed from payment page)
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Set realistic dates (today + 32 days for check-in, +64 for check-out)
+        const today = new Date();
+        const checkInDate = new Date();
+        checkInDate.setDate(today.getDate() + 32);
+        
+        const checkOutDate = new Date();
+        checkOutDate.setDate(checkInDate.getDate() + 32); // 32 night stay
+        
+        // Format dates
+        const formatDate = (date) => {
+            return date.toLocaleDateString('en-US', { 
+                month: 'long', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+        };
+        
+        // Set the email from URL parameters or use a default
+        const userEmail = urlParams.get('email') || 'john.doe@example.com';
+        
+        // Generate a random booking reference
+        const currentYear = today.getFullYear();
+        const randomNum = Math.floor(1000 + Math.random() * 9000);
+        
+        // Update the DOM with dynamic data
+        document.getElementById('year').textContent = currentYear;
+        document.getElementById('random-number').textContent = randomNum;
+        document.getElementById('checkin-date').textContent = formatDate(checkInDate);
+        document.getElementById('checkout-date').textContent = formatDate(checkOutDate);
+        document.getElementById('user-email').textContent = userEmail;
+        document.getElementById('receipt-email').textContent = userEmail;
+        
+        // Update confirmation message with dynamic data
+        document.getElementById('confirmation-message').innerHTML = `
+            Thank you for your payment. Your booking at <strong>Hollow Hills Apartments</strong> has been successfully confirmed.
+            A receipt has been sent to <strong>${userEmail}</strong>.
+        `;
+        
+        // Generate receipt download (simulated)
+        document.getElementById('download-receipt').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Receipt download will start shortly...\n\n' +
+                  `Booking: Hollow Hills Apartments\n` +
+                  `Dates: ${formatDate(checkInDate)} to ${formatDate(checkOutDate)}\n` +
+                  `Amount: $1,200.00\n` +
+                  `Email: ${userEmail}`);
+        });
+        
+        // Animation for the confirmation icon
+        const icon = document.querySelector('.confirmation-icon');
+        setTimeout(() => {
+            icon.style.animation = 'bounce 1s ease';
+        }, 300);
+    </script>
+</body>
+</html>

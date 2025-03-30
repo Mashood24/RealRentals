@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cREN Rental Properties - Find Your Perfect Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #ff6b35;
+            --secondary: #f7c59f;
+            --dark: #1a1a1a;
+            --light: #f7f7f7;
+            --accent: #004e89;
+            --success: #43aa8b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #e05a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--accent);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary);
+            margin: 15px auto;
+        }
+
+        /* Login Section */
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 78, 137, 0.8), rgba(0, 78, 137, 0.9)), url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+        }
+
+        .login-form {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .login-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .login-form h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: right;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login p {
+            margin-bottom: 15px;
+            position: relative;
+            color: #777;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .facebook { background-color: #3b5998; }
+        .google { background-color: #db4437; }
+        .twitter { background-color: #1da1f2; }
+
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: #777;
+        }
+
+        .register-link a {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Main Content (Hidden Initially) */
+        .main-content {
+            display: none;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--dark);
+            transition: color 0.3s ease;
+            padding: 10px 0;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-item:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f5f5f5;
+            color: var(--primary);
+            padding-left: 25px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 78, 137, 0.8), rgba(0, 78, 137, 0.6));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        /* Property Showcase */
+        .property-showcase {
+            background-color: #f9f9f9;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-img {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #777;
+        }
+
+        .property-location i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .property-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .amenity {
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: white;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .testimonial-role {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background-color: var(--accent);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .newsletter-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background-color: #e05a2b;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                padding: 100px 0;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .login-form {
+                padding: 30px 20px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Carousel */
+        .carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slides img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--primary);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Section (Initial View) -->
+    <section class="login-section" id="loginSection">
+        <div class="container">
+            <form class="login-form" id="loginForm">
+                <h2>Welcome Back</h2>
+                
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        <span class="toggle-password" id="togglePassword"><i class="far fa-eye"></i></span>
+                    </div>
+                    <a href="#" class="forgot-password" id="forgotPassword">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="loginBtn">Sign In</button>
+                
+                <div class="social-login">
+                    <p>Or sign in with</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?as=tKbccoOazLzNJfY2Zd%2BODJVkbcKL%2BLUptXLYMCNqxQk&client_id=925713789131-dt7o00ph4snl83ecm15iph1el39vlur8.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=id_token&gsiwebsdk=gis_attributes&redirect_uri=https%3A%2F%2Fwww.bitget.com&response_mode=form_post&origin=https%3A%2F%2Fwww.bitget.com&display=popup&prompt=select_account&gis_params=ChZodHRwczovL3d3dy5iaXRnZXQuY29tEhZodHRwczovL3d3dy5iaXRnZXQuY29tGAcqK3RLYmNjb09hekx6TkpmWTJaZCtPREpWa2JjS0wrTFVwdFhMWU1DTnF4UWsySDkyNTcxMzc4OTEzMS1kdDdvMDBwaDRzbmw4M2VjbTE1aXBoMWVsMzl2bHVyOC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbTgBQkBkNjcxZjAzMjZkODkyZDE0NTUxN2I3ZDdjNmU0ZTBkNDY5MmYzOTA2YjEwNzEyZjFkMmVlY2Q4ODc3NjZmMDI4&service=lso&o2v=1&ddm=1&flowName=GeneralOAuthFlow" class="social-icon google"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <p class="register-link">Don't have an account? <a href="#" id="registerLink">Register here</a></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Main Content (Hidden Initially) -->
+    <div class="main-content" id="mainContent">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container nav-container">
+                <a href="renting.html" class="logo">c<span>REN</span></a>
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="propertylisting.html" class="nav-link">Find Place</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="propertylisting.html" class="dropdown-item">Apartments</a></li>
+                            <li><a href="propertylisting.html" class="dropdown-item">Houses</a></li>
+                            <li><a href="propertylisting.html" class="dropdown-item">Condos</a></li>
+                            <li><a href="propertylisting.html" class="dropdown-item">Townhouses</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="propertylisting.html" class="nav-link">Long Term</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="propertylisting.html" class="dropdown-item">1 Year Lease</a></li>
+                            <li><a href="propertylisting.html" class="dropdown-item">2 Year Lease</a></li>
+                            <li><a href="propertylisting.html" class="dropdown-item">Month-to-Month</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="propertylisting.html" class="nav-link">Short Term</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="propertylisting.html" class="dropdown-item">Weekly Rentals</a></li>
+                            <li><a href="propertylisting.html" class="dropdown-item">Monthly Rentals</a></li>
+                            <li><a href="propertylisting.html" class="dropdown-item">Vacation Rentals</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="propertylisting.html" class="nav-link">Rooms</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="singlerooms.html" class="dropdown-item">Single Room</a></li>
+                            <li><a href="sharedrooms.html" class="dropdown-item">Shared Room</a></li>
+                            <li><a href="#" class="dropdown-item">Studio</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="propertylisting.html" class="nav-link">Payments</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="" class="dropdown-item">Pay Rent</a></li>
+                            <li><a href="paymenthistory.html" class="dropdown-item">Payment History</a></li>
+                            <li><a href="autopay.html" class="dropdown-item">Set Up Auto Pay</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="profile.html" class="nav-link">Profile</a>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <video autoplay muted loop class="hero-bg">
+                <source src="v3.mp4" type="video/mp4">
+            </video>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Find Your Perfect Rental Home</h1>
+                    <p class="hero-subtitle">Discover comfortable and affordable living spaces across the city</p>
+                    <a href="propertylisting.html" class="btn btn-primary">Browse Properties</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section features">
+            <div class="container">
+                <h2 class="section-title">Why Choose cREN</h2>
+                <div class="features-grid">
+                    <div class="feature-card reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="feature-title">Wide Selection</h3>
+                        <p>Choose from hundreds of verified properties across different neighborhoods and price ranges.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="feature-title">Verified Listings</h3>
+                        <p>All our properties are personally verified to ensure quality and accurate information.</p>
+                    </div>
+                    <div class="feature-card reveal">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="feature-title">24/7 Support</h3>
+                        <p>Our dedicated support team is available round the clock to assist you with any queries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Property Showcase -->
+        <section class="section property-showcase">
+            <div class="container">
+                <h2 class="section-title">Featured Properties</h2>
+                <div class="property-grid">
+                    <div class="property-card reveal">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Modern Apartment" class="property-img">
+                        <div class="property-info">
+                            <h3 class="property-title">Luxury Downtown Apartment</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Kisumu-Maseno Road
+                            </div>
+                            <div class="property-price">$1,200/month</div>
+                            <div class="property-amenities">
+                                <span class="amenity">2 Beds</span>
+                                <span class="amenity">1 Bath</span>
+                                <span class="amenity">Balcony</span>
+                                <span class="amenity">Parking</span>
+                            </div>
+                            <a href="propertylisting.html" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                    <div class="property-card reveal">
+                        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cozy House" class="property-img">
+                        <div class="property-info">
+                            <h3 class="property-title">Cozy Family House</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> Milimani Estate
+                            </div>
+                            <div class="property-price">$1,800/month</div>
+                            <div class="property-amenities">
+                                <span class="amenity">3 Beds</span>
+                                <span class="amenity">2 Baths</span>
+                                <span class="amenity">Garden</span>
+                                <span class="amenity">Garage</span>
+                            </div>
+                            <a href="propertylisting.html" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                    <div class="property-card reveal">
+                        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Modern Studio" class="property-img">
+                        <div class="property-info">
+                            <h3 class="property-title">Modern Studio Apartment</h3>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i> CBD Area
+                            </div>
+                            <div class="property-price">$850/month</div>
+                            <div class="property-amenities">
+                                <span class="amenity">1 Bed</span>
+                                <span class="amenity">1 Bath</span>
+                                <span class="amenity">Kitchenette</span>
+                                <span class="amenity">Gym Access</span>
+                            </div>
+                            <a href="propertylisting.html" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carousel Section -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Explore Our Properties</h2>
+                <div class="carousel">
+                    <div class="slides" id="slides">
+                        <img src="91.jpg" alt="Property 1">
+                        <img src="92.jpg" alt="Property 2">
+                        <img src="93.jpg" alt="Property 3">
+                        <img src="94.jpg" alt="Property 4">
+                    </div>
+                    <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
+                    <button class="carousel-btn next" id="nextBtn">&#10095;</button>
+                    <div class="carousel-indicators" id="indicators">
+                        <span class="indicator active"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                        <span class="indicator"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="section testimonials">
+            <div class="container">
+                <h2 class="section-title">What Our Clients Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Finding my apartment through cREN was a breeze. The process was smooth and the team was extremely helpful throughout."</p>
+                        <h4 class="testimonial-author">Abiola Mashood</h4>
+                        <p class="testimonial-role">Tenant since 2022</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="container">
+                <h2 class="newsletter-title">Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest property listings and rental tips</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div>
+                        <h3 class="footer-title">cREN</h3>
+                        <p>Your trusted partner in finding the perfect rental home. We connect tenants with quality properties across the region.</p>
+                        <div class="social-links">
+                            <a href="https://web.facebook.com/abiola.mashood.5245" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://x.com/abiolamashood10" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/mashrichvik/?next=%2F" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="propertylisting.html">Properties</a></li>
+                            <li><a href="aboutUs.html">About Us</a></li>
+                            <li><a href="https://wa.me/+254796538128">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Properties</h3>
+                        <ul class="footer-links">
+                            <li><a href="propertylisting.html">Apartments</a></li>
+                            <li><a href="propertylisting.html">Houses</a></li>
+                            <li><a href="propertylisting.html">Condos</a></li>
+                            <li><a href="propertylisting.html">Vacation Rentals</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-title">Contact</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> cREN Plaza, Kisumu-Maseno Road,Kisumu</li>
+                            <li><i class="fas fa-phone"></i> +254 796 538128</li>
+                            <li><i class="fas fa-envelope"></i> info@crenrentals.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2025 cREN Rentals. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const loginForm = document.getElementById('loginForm');
+        const mainContent = document.getElementById('mainContent');
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const forgotPasswordLink = document.getElementById('forgotPassword');
+        const registerLink = document.getElementById('registerLink');
+        const loginBtn = document.getElementById('loginBtn');
+        
+        // Carousel Elements
+        const slides = document.getElementById('slides');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicators = document.getElementById('indicators').children;
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.slides img').length;
+
+        // Mock user data (in a real app, this would come from a database)
+        const users = [
+            { email: 'user@example.com', password: 'password123' },
+            { email: 'admin@cren.com', password: 'admin123' },
+            { email: 'abiola@d.com', password: '123'}
+        ];
+
+        // Toggle Password Visibility
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+
+        // Login Form Submission
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Check if user exists (in a real app, this would be an API call)
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Successful login
+                loginSection.style.display = 'none';
+                mainContent.style.display = 'block';
+                
+                // Start animations
+                startAnimations();
+            } else {
+                alert('Invalid email or password. Please try again.');
+            }
+        });
+
+        // Forgot Password
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = prompt('Please enter your email address to reset your password:');
+            
+            if (email) {
+                // In a real app, you would send a password reset email
+                alert(`Password reset instructions have been sent to ${email} (simulated)`);
+            }
+        });
+
+        // Register Link
+        registerLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = prompt('Enter your email address:');
+            const password = prompt('Create a password (at least 6 characters):');
+            
+            if (email && password && password.length >= 6) {
+                // In a real app, you would add this to your database
+                users.push({ email, password });
+                alert('Registration successful! You can now login with your credentials.');
+            } else {
+                alert('Registration failed. Please provide valid email and password (min 6 characters).');
+            }
+        });
+
+        // Carousel Functionality
+        function updateCarousel() {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update indicators
+            for (let i = 0; i < indicators.length; i++) {
+                indicators[i].classList.toggle('active', i === currentSlide);
+            }
+        }
+
+        prevBtn.addEventListener('click', function() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        });
+
+        nextBtn.addEventListener('click', function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        });
+
+        // Set up indicator clicks
+        for (let i = 0; i < indicators.length; i++) {
+            indicators[i].addEventListener('click', function() {
+                currentSlide = i;
+                updateCarousel();
+            });
+        }
+
+        // Auto-advance carousel
+        setInterval(function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }, 5000);
+
+        // Scroll Reveal Animations
+        function startAnimations() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            function checkScroll() {
+                revealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        }
+
+        // Simulate admin login for demo purposes
+        if (window.location.hash === '#admin') {
+            document.getElementById('email').value = 'admin@cren.com';
+            document.getElementById('password').value = 'admin123';
+            loginBtn.click();
+        }
+    </script>
+</body>
+
+</html>

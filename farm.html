@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farm Properties for Sale & Rent | cREN Agricultural Real Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5d9c59;
+            --secondary: #2b580c;
+            --accent: #d8b384;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient rgba(0,0,0,0.6), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .search-bar {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .search-bar input, 
+        .search-bar select {
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            flex: 1 1 200px;
+        }
+
+        .search-bar button {
+            padding: 15px 30px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 50px auto;
+            padding: 20px 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--primary);
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-image {
+            height: 250px;
+            position: relative;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .property-info {
+            padding: 25px;
+        }
+
+        .property-info h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        .property-location i {
+            color: var(--primary);
+        }
+
+        .property-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .feature i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .property-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .property-price span {
+            font-size: 15px;
+            font-weight: 400;
+            color: #777;
+        }
+
+        .property-link {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .property-link:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .farm-types {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .type-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            width: 220px;
+        }
+
+        .type-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .type-icon {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .type-card h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .type-card p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .cta-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin: 80px 0;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+        }
+
+        .cta-content p {
+            margin-bottom: 35px;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 35px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #c9a06d;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .services-section {
+            background-color: #f9f9f7;
+            padding: 80px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 35px 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto 50px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .footer-links h3, 
+        .footer-contact h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 18px;
+        }
+
+        .contact-item i {
+            margin-right: 12px;
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
+            font-size: 15px;
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 80px 0 40px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                padding: 15px;
+            }
+            
+            .search-bar form {
+                flex-direction: column;
+            }
+            
+            .farm-types {
+                gap: 15px;
+            }
+            
+            .type-card {
+                width: 160px;
+                padding: 20px 15px;
+            }
+            
+            .cta-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 60px 0 30px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .farm-types {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .type-card {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Agricultural & Farm Properties</h1>
+        <p>Find your perfect farmland, ranch, or agricultural investment across Kenya's most fertile regions</p>
+        <div class="search-bar">
+            <form>
+                <select>
+                    <option value="">Property Type</option>
+                    <option value="farmland">Farmland</option>
+                    <option value="ranch">Ranch</option>
+                    <option value="orchard">Orchard</option>
+                    <option value="dairy">Dairy Farm</option>
+                    <option value="poultry">Poultry Farm</option>
+                </select>
+                <select>
+                    <option value="">Location</option>
+                    <option value="rift">Rift Valley</option>
+                    <option value="central">Central Kenya</option>
+                    <option value="eastern">Eastern Kenya</option>
+                    <option value="coast">Coastal Region</option>
+                </select>
+                <select>
+                    <option value="">Size (Acres)</option>
+                    <option value="1-5">1-5 Acres</option>
+                    <option value="5-20">5-20 Acres</option>
+                    <option value="20-100">20-100 Acres</option>
+                    <option value="100+">100+ Acres</option>
+                </select>
+                <select>
+                    <option value="">Price Range</option>
+                    <option value="0-1m">KES 0 - 1M</option>
+                    <option value="1m-5m">KES 1M - 5M</option>
+                    <option value="5m-20m">KES 5M - 20M</option>
+                    <option value="20m+">KES 20M+</option>
+                </select>
+                <button type="submit"><i class="fas fa-search"></i> Find Farms</button>
+            </form>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="residential.html" class="nav-link">Residential</a>
+                <a href="commercial.html" class="nav-link">Commercial</a>
+                <a href="farms.html" class="nav-link active">Farm Properties</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="section-title">Featured Farm Properties</h2>
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Maize farm">
+                    <span class="property-badge">For Sale</span>
+                </div>
+                <div class="property-info">
+                    <h3>50-Acre Maize Farm</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Nakuru, Rift Valley
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i> 50 Acres
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tint"></i> Irrigation
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tractor"></i> Equipment
+                        </div>
+                    </div>
+                    <div class="property-price">KES 15,000,000</div>
+                    <a href="farm-details.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80" alt="Coffee farm">
+                    <span class="property-badge">For Lease</span>
+                </div>
+                <div class="property-info">
+                    <h3>20-Acre Coffee Plantation</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Kiambu, Central
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i> 20 Acres
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tree"></i> Mature Plants
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-warehouse"></i> Processing Shed
+                        </div>
+                    </div>
+                    <div class="property-price">KES 250,000 <span>/month</span></div>
+                    <a href="farm-details.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Dairy farm">
+                    <span class="property-badge">For Sale</span>
+                </div>
+                <div class="property-info">
+                    <h3>Dairy Farm with 50 Cows</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Limuru, Central
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i> 30 Acres
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-cow"></i> 50 Friesians
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-industry"></i> Milk Processing
+                        </div>
+                    </div>
+                    <div class="property-price">KES 35,000,000</div>
+                    <a href="farm-details.html" class="property-link">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Farm Types Available</h2>
+        <div class="farm-types">
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-wheat-awn"></i>
+                </div>
+                <h3>Crop Farms</h3>
+                <p>Maize, wheat, tea, coffee and other cash crops</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-cow"></i>
+                </div>
+                <h3>Livestock Farms</h3>
+                <p>Dairy, beef, poultry, sheep and goat farms</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-apple-whole"></i>
+                </div>
+                <h3>Orchards</h3>
+                <p>Fruit farms including mangoes, avocados and citrus</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-tractor"></i>
+                </div>
+                <h3>Mechanized Farms</h3>
+                <p>Fully equipped with modern farming machinery</p>
+            </div>
+            <div class="type-card">
+                <div class="type-icon">
+                    <i class="fas fa-water"></i>
+                </div>
+                <h3>Irrigated Farms</h3>
+                <p>Year-round water supply for continuous production</p>
+            </div>
+        </div>
+
+        <div class="property-grid">
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Poultry farm">
+                    <span class="property-badge">For Sale</span>
+                </div>
+                <div class="property-info">
+                    <h3>Poultry Farm (5,000 Birds)</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Thika, Central
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i> 5 Acres
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-egg"></i> Layers Operation
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-building"></i> 4 Poultry Houses
+                        </div>
+                    </div>
+                    <div class="property-price">KES 12,500,000</div>
+                    <a href="farm-details.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Tea plantation">
+                    <span class="property-badge">For Sale</span>
+                </div>
+                <div class="property-info">
+                    <h3>Tea Plantation</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Kericho, Rift Valley
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i> 100 Acres
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-leaf"></i> Mature Bushes
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-truck"></i> Factory Access
+                        </div>
+                    </div>
+                    <div class="property-price">KES 65,000,000</div>
+                    <a href="farm-details.html" class="property-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1505253469693-bfcd4f4d7ecf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Horticulture farm">
+                    <span class="property-badge">For Lease</span>
+                </div>
+                <div class="property-info">
+                    <h3>Horticulture Farm</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Naivasha, Rift Valley
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i> 10 Acres
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tint"></i> Drip Irrigation
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-truck"></i> Export Ready
+                        </div>
+                    </div>
+                    <div class="property-price">KES 180,000 <span>/month</span></div>
+                    <a href="farm-details.html" class="property-link">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Invest in Agricultural Land?</h2>
+            <p>Our agricultural real estate specialists can help you find the perfect farm property tailored to your needs. Whether you're looking to start a new venture or expand your existing operations, we have the expertise to guide you.</p>
+            <a href="contact.html" class="cta-button">Contact Our Farm Specialists</a>
+        </div>
+    </div>
+
+    <div class="services-section">
+        <div class="container">
+            <h2 class="section-title">Our Agricultural Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3 class="service-title">Farm Valuation</h3>
+                    <p>Professional valuation services for agricultural properties including land, crops, and infrastructure.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="service-title">Lease Negotiation</h3>
+                    <p>Expert negotiation for favorable lease terms between landowners and farmers.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="service-title">Feasibility Studies</h3>
+                    <p>Comprehensive analysis of agricultural potential for different farm types and locations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Kenya's leading agricultural real estate platform connecting buyers and sellers of farmland since 2010.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="residential.html">Residential</a></li>
+                    <li><a href="commercial.html">Commercial</a></li>
+                    <li><a href="farms.html">Farm Properties</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Farm Types</h3>
+                <ul>
+                    <li><a href="#">Crop Farms</a></li>
+                    <li><a href="#">Livestock Farms</a></li>
+                    <li><a href="#">Orchards</a></li>
+                    <li><a href="#">Greenhouses</a></li>
+                    <li><a href="#">Fish Farms</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Plaza, Westlands Road, Nairobi</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 700 123456</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>farms@cren.co.ke</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 cREN Agricultural Real Estate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Property search functionality
+        document.querySelector('.search-bar form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would filter properties
+            alert('Search functionality would filter farm properties here');
+        });
+
+        // Property card hover effects
+        const propertyCards = document.querySelectorAll('.property-card');
+        propertyCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+                this.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

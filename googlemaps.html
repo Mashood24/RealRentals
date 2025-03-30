@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Locations in Kenya | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+
+        .property-locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .map-container {
+            height: 250px;
+            width: 100%;
+            position: relative;
+        }
+
+        .map {
+            height: 100%;
+            width: 100%;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-info h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .property-info p {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .directions-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .directions-btn:hover {
+            background-color: #238f81;
+        }
+
+        .directions-btn i {
+            margin-right: 8px;
+        }
+
+        .search-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background-color: #e2b647;
+        }
+
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-btn {
+                padding: 12px;
+            }
+        }
+
+        .footer {
+            background-color: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            color: white;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Our Properties Across Kenya</h1>
+            <p>Find directions to any of our rental properties</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <form class="search-form" id="location-search">
+                <input type="text" class="search-input" id="search-input" placeholder="Search by city or property name...">
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+        </div>
+
+        <div class="property-locations">
+            <!-- Nairobi Property -->
+            <div class="property-card">
+                <div class="map-container">
+                    <div class="map" id="nairobi-map"></div>
+                </div>
+                <div class="property-info">
+                    <h3>Hollow Hills Apartments</h3>
+                    <p>Westlands, Nairobi</p>
+                    <a href="https://www.google.com/maps/dir//Hollow+Hills+Apartments,+Westlands,+Nairobi,+Kenya/@-1.265835,36.802038,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x182f173c0a1f9de7:0xad2c84df1f7f2ec8!2m2!1d36.802038!2d-1.265835" 
+                       target="_blank" class="directions-btn">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mombasa Property -->
+            <div class="property-card">
+                <div class="map-container">
+                    <div class="map" id="mombasa-map"></div>
+                </div>
+                <div class="property-info">
+                    <h3>Beachfront Villas</h3>
+                    <p>Nyali, Mombasa</p>
+                    <a href="https://www.google.com/maps/dir//Beachfront+Villas,+Nyali,+Mombasa,+Kenya/@-4.024922,39.713243,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x184012a78f6a9e17:0x9e3a2a5f1e4c4e1f!2m2!1d39.713243!2d-4.024922" 
+                       target="_blank" class="directions-btn">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+
+            <!-- Kisumu Property -->
+            <div class="property-card">
+                <div class="map-container">
+                    <div class="map" id="kisumu-map"></div>
+                </div>
+                <div class="property-info">
+                    <h3>Lakeview Apartments</h3>
+                    <p>Milimani, Kisumu</p>
+                    <a href="https://www.google.com/maps/dir//Lakeview+Apartments,+Milimani,+Kisumu,+Kenya/@-0.091702,34.767912,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x182aa4f3a9c00001:0x9e3a2a5f1e4c4e1f!2m2!1d34.767912!2d-0.091702" 
+                       target="_blank" class="directions-btn">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+
+            <!-- Nakuru Property -->
+            <div class="property-card">
+                <div class="map-container">
+                    <div class="map" id="nakuru-map"></div>
+                </div>
+                <div class="property-info">
+                    <h3>Greenpark Residences</h3>
+                    <p>Lanet, Nakuru</p>
+                    <a href="https://www.google.com/maps/dir//Greenpark+Residences,+Lanet,+Nakuru,+Kenya/@-0.278015,36.097456,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x18298d9a9a9a9a9a:0x9e3a2a5f1e4c4e1f!2m2!1d36.097456!2d-0.278015" 
+                       target="_blank" class="directions-btn">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+
+            <!-- Naivasha Property -->
+            <div class="property-card">
+                <div class="map-container">
+                    <div class="map" id="naivasha-map"></div>
+                </div>
+                <div class="property-info">
+                    <h3>Lake Naivasha Resort</h3>
+                    <p>Naivasha Town</p>
+                    <a href="https://www.google.com/maps/dir//Lake+Naivasha+Resort,+Naivasha+Town,+Kenya/@-0.713611,36.433056,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x1828a3a9a9a9a9a9:0x9e3a2a5f1e4c4e1f!2m2!1d36.433056!2d-0.713611" 
+                       target="_blank" class="directions-btn">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+
+            <!-- Eldoret Property -->
+            <div class="property-card">
+                <div class="map-container">
+                    <div class="map" id="eldoret-map"></div>
+                </div>
+                <div class="property-info">
+                    <h3>Highland Gardens</h3>
+                    <p>Elgon View, Eldoret</p>
+                    <a href="https://www.google.com/maps/dir//Highland+Gardens,+Elgon+View,+Eldoret,+Kenya/@0.514722,35.269722,15z/data=!4m8!4m7!1m0!1m5!1m1!1s0x178101a9a9a9a9a9:0x9e3a2a5f1e4c4e1f!2m2!1d35.269722!2d0.514722" 
+                       target="_blank" class="directions-btn">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>cREN Rentals - Your trusted property partner in Kenya</p>
+            <p>Contact us: info@crenrentals.com | +254 796 538128</p>
+            <div class="social-links">
+                <a href="https://web.facebook.com/abiola.mashood.5245" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/abiolamashood10" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/mashrichvik/?next=%2F" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Maps API -->
+    <script>
+        // Initialize and display maps when the window loads
+        function initMaps() {
+            // Nairobi Property
+            const nairobi = { lat: -1.265835, lng: 36.802038 };
+            const nairobiMap = new google.maps.Map(document.getElementById("nairobi-map"), {
+                zoom: 15,
+                center: nairobi,
+                mapId: "nairobi_map"
+            });
+            new google.maps.Marker({
+                position: nairobi,
+                map: nairobiMap,
+                title: "Hollow Hills Apartments"
+            });
+
+            // Mombasa Property
+            const mombasa = { lat: -4.024922, lng: 39.713243 };
+            const mombasaMap = new google.maps.Map(document.getElementById("mombasa-map"), {
+                zoom: 15,
+                center: mombasa,
+                mapId: "mombasa_map"
+            });
+            new google.maps.Marker({
+                position: mombasa,
+                map: mombasaMap,
+                title: "Beachfront Villas"
+            });
+
+            // Kisumu Property
+            const kisumu = { lat: -0.091702, lng: 34.767912 };
+            const kisumuMap = new google.maps.Map(document.getElementById("kisumu-map"), {
+                zoom: 15,
+                center: kisumu,
+                mapId: "kisumu_map"
+            });
+            new google.maps.Marker({
+                position: kisumu,
+                map: kisumuMap,
+                title: "Lakeview Apartments"
+            });
+
+            // Nakuru Property
+            const nakuru = { lat: -0.278015, lng: 36.097456 };
+            const nakuruMap = new google.maps.Map(document.getElementById("nakuru-map"), {
+                zoom: 15,
+                center: nakuru,
+                mapId: "nakuru_map"
+            });
+            new google.maps.Marker({
+                position: nakuru,
+                map: nakuruMap,
+                title: "Greenpark Residences"
+            });
+
+            // Naivasha Property
+            const naivasha = { lat: -0.713611, lng: 36.433056 };
+            const naivashaMap = new google.maps.Map(document.getElementById("naivasha-map"), {
+                zoom: 15,
+                center: naivasha,
+                mapId: "naivasha_map"
+            });
+            new google.maps.Marker({
+                position: naivasha,
+                map: naivashaMap,
+                title: "Lake Naivasha Resort"
+            });
+
+            // Eldoret Property
+            const eldoret = { lat: 0.514722, lng: 35.269722 };
+            const eldoretMap = new google.maps.Map(document.getElementById("eldoret-map"), {
+                zoom: 15,
+                center: eldoret,
+                mapId: "eldoret_map"
+            });
+            new google.maps.Marker({
+                position: eldoret,
+                map: eldoretMap,
+                title: "Highland Gardens"
+            });
+        }
+
+        // Search functionality
+        document.getElementById('location-search').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const propertyCards = document.querySelectorAll('.property-card');
+            
+            propertyCards.forEach(card => {
+                const propertyText = card.textContent.toLowerCase();
+                if (propertyText.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+    <!-- Load Google Maps API with your API key -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCE2VinQcU2nkaTr0HwjseuQNAmV6gxZg&callback=initMaps&libraries=places">
+    </script>
+</body>
+</html>

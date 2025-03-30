@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Up Autopay | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+            --success: #4caf50;
+            --error: #f44336;
+        }
+
+        /* Base styles from existing design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Autopay specific styles */
+        .autopay-benefits {
+            background-color: rgba(42, 157, 143, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .autopay-benefits h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .autopay-benefits ul {
+            padding-left: 20px;
+        }
+
+        .autopay-benefits li {
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .payment-method-selector {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method-selector:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-method-selector.selected {
+            border-color: var(--primary);
+            background-color: rgba(42, 157, 143, 0.1);
+        }
+
+        .payment-method-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .payment-method-info {
+            flex: 1;
+        }
+
+        .payment-method-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .payment-method-info p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .payment-method-radio {
+            width: 20px;
+            height: 20px;
+        }
+
+        .card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .card-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+
+        .autopay-summary {
+            margin-top: 30px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .summary-item .label {
+            color: #555;
+        }
+
+        .summary-item .value {
+            font-weight: 500;
+        }
+
+        .autopay-terms {
+            font-size: 14px;
+            color: #777;
+            margin-top: 20px;
+        }
+
+        .autopay-terms a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .autopay-terms a:hover {
+            text-decoration: underline;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background-color: rgba(76, 175, 80, 0.1);
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+
+        .success-message i {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .success-message h3 {
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .card-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 40px 0 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="propertylisting.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Set Up Autopay</span>
+            </div>
+            <h1>Set Up Automatic Payments</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="autopay-benefits">
+            <h3>Why Enable Autopay?</h3>
+            <ul>
+                <li><strong>Never miss a payment</strong> - Avoid late fees and maintain good standing</li>
+                <li><strong>Save time</strong> - No need to remember payment dates</li>
+                <li><strong>Peace of mind</strong> - Your rent is always paid on time</li>
+                <li><strong>Flexible control</strong> - Change or cancel anytime</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Autopay Settings</h2>
+            
+            <form id="autopayForm">
+                <div class="form-group">
+                    <label for="paymentFrequency">Payment Frequency</label>
+                    <select id="paymentFrequency" class="form-control">
+                        <option value="monthly">Monthly</option>
+                        <option value="biweekly">Bi-Weekly</option>
+                        <option value="quarterly">Quarterly</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentDate">Payment Date</label>
+                    <select id="paymentDate" class="form-control">
+                        <option value="1">1st of the month</option>
+                        <option value="5" selected>5th of the month</option>
+                        <option value="10">10th of the month</option>
+                        <option value="15">15th of the month</option>
+                        <option value="20">20th of the month</option>
+                        <option value="25">25th of the month</option>
+                    </select>
+                </div>
+
+                <h3 style="margin: 25px 0 15px; color: var(--secondary);">Payment Method</h3>
+
+                <div class="payment-method-selector selected" id="existingCardMethod">
+                    <input type="radio" name="paymentMethod" id="existingCard" checked class="payment-method-radio">
+                    <img src="https://cdn-icons-png.flaticon.com/512/179/179457.png" alt="Visa" class="payment-method-icon">
+                    <div class="payment-method-info">
+                        <h4>Visa ending in 4242</h4>
+                        <p>Expires 05/25</p>
+                    </div>
+                </div>
+
+                <div class="payment-method-selector" id="newCardMethod">
+                    <input type="radio" name="paymentMethod" id="newCard" class="payment-method-radio">
+                    <i class="far fa-credit-card payment-method-icon" style="font-size: 1.5rem; color: var(--primary);"></i>
+                    <div class="payment-method-info">
+                        <h4>Add New Payment Method</h4>
+                        <p>Credit or debit card</p>
+                    </div>
+                </div>
+
+                <div id="newCardForm" style="display: none;">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <div class="input-group">
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                            <i class="fas fa-credit-card card-icon"></i>
+                        </div>
+                        <div class="error-message" id="cardNumberError">Please enter a valid card number</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName" placeholder="John Doe">
+                        <div class="error-message" id="cardNameError">Please enter the name on your card</div>
+                    </div>
+
+                    <div class="card-details">
+                        <div class="form-group">
+                            <label for="expiryDate">Expiration Date</label>
+                            <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                            <div class="error-message" id="expiryDateError">Please enter a valid expiration date</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvv">Security Code (CVV)</label>
+                            <div class="input-group">
+                                <input type="text" id="cvv" placeholder="123" maxlength="4">
+                                <i class="fas fa-question-circle card-icon" title="3-digit code on back of card"></i>
+                            </div>
+                            <div class="error-message" id="cvvError">Please enter a valid security code</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" id="startDate" class="form-control">
+                    <div class="error-message" id="startDateError">Please select a valid start date</div>
+                </div>
+
+                <div class="form-group" style="margin-top: 25px;">
+                    <input type="checkbox" id="emailConfirmation" checked>
+                    <label for="emailConfirmation">Email me payment confirmations</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="enableAutopayBtn">Enable Autopay</button>
+
+                <div class="autopay-terms">
+                    <p>By enabling autopay, you authorize cREN Rentals to automatically charge your payment method according to the schedule you've selected. You may cancel or modify autopay at any time in your account settings. <a href="#">View full terms and conditions</a>.</p>
+                </div>
+            </form>
+
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Autopay Successfully Enabled!</h3>
+                <p>Your automatic payments have been set up. You'll receive a confirmation email with all the details.</p>
+                <div class="autopay-summary" style="margin-top: 20px;">
+                    <div class="summary-item">
+                        <span class="label">Next Payment:</span>
+                        <span class="value" id="successNextPayment">June 5, 2023</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Amount:</span>
+                        <span class="value" id="successAmount">KES 8,500</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Payment Method:</span>
+                        <span class="value" id="successMethod">Visa ending in 4242</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default start date to next payment date
+            const today = new Date();
+            const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 5);
+            const formattedDate = nextMonth.toISOString().split('T')[0];
+            document.getElementById('startDate').value = formattedDate;
+            document.getElementById('startDate').min = formattedDate;
+
+            // Toggle between existing and new card
+            document.getElementById('existingCardMethod').addEventListener('click', function() {
+                this.classList.add('selected');
+                document.getElementById('newCardMethod').classList.remove('selected');
+                document.getElementById('newCardForm').style.display = 'none';
+                document.getElementById('existingCard').checked = true;
+            });
+
+            document.getElementById('newCardMethod').addEventListener('click', function() {
+                this.classList.add('selected');
+                document.getElementById('existingCardMethod').classList.remove('selected');
+                document.getElementById('newCardForm').style.display = 'block';
+                document.getElementById('newCard').checked = true;
+            });
+
+            // Format card number input
+            document.getElementById('cardNumber').addEventListener('input', function(e) {
+                let value = this.value.replace(/\s+/g, '');
+                if (value.length > 0) {
+                    value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                }
+                this.value = value;
+            });
+
+            // Format expiry date input
+            document.getElementById('expiryDate').addEventListener('input', function(e) {
+                let value = this.value.replace(/\D+/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                this.value = value;
+            });
+
+            // Form validation and submission
+            document.getElementById('autopayForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset error messages
+                document.querySelectorAll('.error-message').forEach(el => {
+                    el.style.display = 'none';
+                });
+
+                let isValid = true;
+
+                // Validate new card if selected
+                if (document.getElementById('newCard').checked) {
+                    const cardNumber = document.getElementById('cardNumber').value.replace(/\s+/g, '');
+                    if (cardNumber.length < 16 || !/^\d+$/.test(cardNumber)) {
+                        document.getElementById('cardNumberError').style.display = 'block';
+                        isValid = false;
+                    }
+
+                    if (document.getElementById('cardName').value.trim() === '') {
+                        document.getElementById('cardNameError').style.display = 'block';
+                        isValid = false;
+                    }
+
+                    const expiryDate = document.getElementById('expiryDate').value;
+                    if (!/^\d{2}\/\d{2}$/.test(expiryDate)) {
+                        document.getElementById('expiryDateError').style.display = 'block';
+                        isValid = false;
+                    }
+
+                    const cvv = document.getElementById('cvv').value;
+                    if (cvv.length < 3 || !/^\d+$/.test(cvv)) {
+                        document.getElementById('cvvError').style.display = 'block';
+                        isValid = false;
+                    }
+                }
+
+                if (isValid) {
+                    // In a real implementation, you would submit the form here
+                    // For demo purposes, we'll just show the success message
+                    
+                    // Update success message with selected values
+                    const frequency = document.getElementById('paymentFrequency').options[document.getElementById('paymentFrequency').selectedIndex].text;
+                    const date = document.getElementById('paymentDate').value;
+                    const startDate = new Date(document.getElementById('startDate').value);
+                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                    
+                    document.getElementById('successNextPayment').textContent = 
+                        startDate.toLocaleDateString('en-US', options);
+                    
+                    document.getElementById('successAmount').textContent = 
+                        frequency === 'Monthly' ? 'KES 8,500' : 
+                        frequency === 'Bi-Weekly' ? 'KES 4,250' : 'KES 25,500';
+                    
+                    document.getElementById('successMethod').textContent = 
+                        document.getElementById('existingCard').checked ? 
+                        'Visa ending in 4242' : 'New credit card';
+                    
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Scroll to success message
+                    window.scrollTo({
+                        top: document.getElementById('successMessage').offsetTop - 20,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

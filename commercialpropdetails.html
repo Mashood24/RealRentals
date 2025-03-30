@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Office Space in Westlands | cREN Commercial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .breadcrumb i {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .header .location i {
+            color: var(--accent);
+        }
+
+        .header .price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .header .price-period {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .property-badge {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .property-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .property-gallery {
+            margin-bottom: 40px;
+        }
+
+        .main-image {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .thumbnail {
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-description h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .property-description h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .property-description p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .features-section {
+            margin: 40px 0;
+        }
+
+        .features-section h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .feature span {
+            font-weight: 500;
+        }
+
+        .amenities-section {
+            margin: 40px 0;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .amenity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .amenity i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .map-section {
+            margin: 60px 0;
+        }
+
+        .map-section h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .map-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .booking-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .booking-card h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .price-display {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .price-display .amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-display .period {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .availability {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 25px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .booking-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .booking-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .booking-form input, 
+        .booking-form select,
+        .booking-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .booking-form input:focus, 
+        .booking-form select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            margin-top: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(42, 157, 143, 0.1);
+        }
+
+        .contact-agent {
+            margin-top: 40px;
+        }
+
+        .agent-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .agent-photo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+        }
+
+        .agent-details h4 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .agent-details p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .similar-properties {
+            margin: 60px 0;
+        }
+
+        .similar-properties h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .similar-properties h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-image {
+            height: 200px;
+            position: relative;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-info h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .property-location i {
+            color: var(--primary);
+        }
+
+        .property-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .property-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #777;
+        }
+
+        .property-link {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .property-link:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 992px) {
+            .property-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-card {
+                position: static;
+                margin-top: 40px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main-image {
+                height: 300px;
+            }
+            
+            .thumbnail-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 40px 0 20px;
+            }
+            
+            .header .price {
+                font-size: 1.5rem;
+            }
+            
+            .features-grid, .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="propertylisting.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <a href="commercialproperties.html">Commercial Properties</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Westlands Office</span>
+            </div>
+            <h1>Premium Office Space in Westlands</h1>
+            <div class="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Westlands, Nairobi, Kenya</span>
+            </div>
+            <div class="property-badge">For Lease</div>
+            <div class="price">KES 250,000</div>
+            <div class="price-period">per month (exclusive of VAT)</div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="propertylisting.html" class="nav-link">Home</a>
+                <a href="commercialproperties.html" class="nav-link active">Commercial</a>
+                <a href="agents.html" class="nav-link">Agents</a>
+                <a href="https://wa.me/+254796538128" class="nav-link">Contact</a>
+                <a href="renting.html" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="property-details">
+            <div class="property-main">
+                <div class="property-gallery">
+                    <div class="main-image">
+                        <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Premium office space in Westlands">
+                    </div>
+                    <div class="thumbnail-grid">
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Office reception">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Meeting room">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Office workspace">
+                        </div>
+                        <div class="thumbnail">
+                            <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Building amenities">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-description">
+                    <h2>About This Property</h2>
+                    <p>This premium office space in Westlands offers a prestigious business address with high-end finishes and modern amenities. The 2,500 sq.ft suite is located on the 8th floor of a Class A office building with 24/7 security and professional management.</p>
+                    <p>The space features an open floor plan that can accommodate 15-20 workstations, two private offices, a conference room, and a reception area. Floor-to-ceiling windows provide abundant natural light and panoramic views of Nairobi.</p>
+                    <p>The building offers premium amenities including a business center, conference facilities, on-site café, and ample parking. Located in the heart of Westlands, this property provides easy access to major banks, restaurants, and transportation hubs.</p>
+                </div>
+
+                <div class="features-section">
+                    <h3>Space Features</h3>
+                    <div class="features-grid">
+                        <div class="feature">
+                            <i class="fas fa-arrows-alt"></i>
+                            <span>2,500 sq.ft of space</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-door-open"></i>
+                            <span>Open floor plan</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-window-maximize"></i>
+                            <span>Floor-to-ceiling windows</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-snowflake"></i>
+                            <span>HVAC system</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>LED lighting</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <span>High-speed fiber internet</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-phone"></i>
+                            <span>VOIP ready</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Access control system</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="amenities-section">
+                    <h3>Building Amenities</h3>
+                    <div class="amenities-grid">
+                        <div class="amenity">
+                            <i class="fas fa-concierge-bell"></i>
+                            <span>24/7 Reception</span>
+                        </div>
+                        <div class="amenity">
+                            <i class="fas fa-lock"></i>
+                            <span>24/7 Security</span>
+                        </div>
+                        <div class="amenity">
+                            <i class="fas fa-car"></i>
+                            <span>Secure parking</span>
+                        </div>
+                        <div class="amenity">
+                            <i class="fas fa-coffee"></i>
+                            <span>On-site café</span>
+                        </div>
+                        <div class="amenity">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <span>Breakout areas</span>
+                        </div>
+                        <div class="amenity">
+                            <i class="fas fa-bolt"></i>
+                            <span>Backup generator</span>
+                        </div>
+                        <div class="amenity">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Fitness center</span>
+                        </div>
+                        <div class="amenity">
+                            <i class="fas fa-bicycle"></i>
+                            <span>Bicycle storage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-section">
+                    <h2>Location</h2>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.808478756639!2d36.802038!3d-1.265835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f173c0a1f9de7%3A0xad2c84df1f7f2ec8!2sHollow%20Hills%20Apartments!5e0!3m2!1sen!2ske!4v1689876543210!5m2!1sen!2ske" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <p style="margin-top: 15px;">Located in the heart of Westlands, this prestigious office building is just steps away from major corporate headquarters, upscale restaurants, and shopping centers. The location offers excellent transport links with easy access to Waiyaki Way and the Nairobi Expressway. The building is within walking distance of the Westlands Matatu terminus and several bus stops.</p>
+                </div>
+            </div>
+
+            <div class="booking-card">
+                <h3>Inquire About This Space</h3>
+                <div class="price-display">
+                    <div class="amount">KES 250,000</div>
+                    <div class="period">per month + VAT</div>
+                </div>
+                <div class="availability">Available Immediately</div>
+                
+                <form class="booking-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company Name</label>
+                        <input type="text" id="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="move-date">Preferred Move-In Date</label>
+                        <input type="date" id="move-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Lease Term</label>
+                        <select id="duration" required>
+                            <option value="">Select term</option>
+                            <option value="12">1 Year</option>
+                            <option value="24">2 Years</option>
+                            <option value="36">3 Years</option>
+                            <option value="60">5 Years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Additional Requirements</label>
+                        <textarea id="message" placeholder="Tell us about your business needs"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Request Viewing</button>
+                    <a href="tel:+254700000000" class="btn btn-outline">
+                        <i class="fas fa-phone"></i> Call Now
+                    </a>
+                </form>
+
+                <div class="contact-agent">
+                    <h4>Listing Agent</h4>
+                    <div class="agent-info">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Mwangi" class="agent-photo">
+                        <div class="agent-details">
+                            <h4>James Mwangi</h4>
+                            <p>Commercial Leasing Specialist</p>
+                        </div>
+                    </div>
+
+                    <form class="contact-form">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="tel" placeholder="Phone Number" required>
+                        <textarea placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="viewing-info">
+                    <h4>Viewing Information</h4>
+                    <p>Viewings are available Monday to Friday between 8:00 AM and 5:00 PM. Weekend viewings can be arranged by appointment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="similar-properties">
+            <h2>Similar Commercial Properties</h2>
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Modern office space">
+                        <div class="property-badge">For Lease</div>
+                    </div>
+                    <div class="property-info">
+                        <h3>Upper Hill Office Suite</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Upper Hill, Nairobi
+                        </div>
+                        <div class="property-price">KES 180,000 <span>/month</span></div>
+                        <a href="commercial-details.html" class="property-link">View Details</a>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Warehouse space">
+                        <div class="property-badge">For Lease</div>
+                    </div>
+                    <div class="property-info">
+                        <h3>Industrial Warehouse</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Mombasa Road
+                        </div>
+                        <div class="property-price">KES 350,000 <span>/month</span></div>
+                        <a href="commercial-details.html" class="property-link">View Details</a>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Office space">
+                        <div class="property-badge">For Lease</div>
+                    </div>
+                    <div class="property-info">
+                        <h3>Serviced Offices</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Kilimani, Nairobi
+                        </div>
+                        <div class="property-price">KES 120,000 <span>/month</span></div>
+                        <a href="commercial-details.html" class="property-link">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Kenya's premier commercial real estate platform connecting businesses with premium properties since 2015.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="residential.html">Residential</a></li>
+                    <li><a href="commercial.html">Commercial</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Plaza, Westlands Road, Nairobi</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 700 000000</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>commercial@cren.co.ke</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 cREN Commercial Real Estate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Thumbnail gallery functionality
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.querySelector('.main-image img');
+        
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', function() {
+                const imgSrc = this.querySelector('img').src;
+                mainImage.src = imgSrc;
+                
+                // Remove active class from all thumbnails
+                thumbnails.forEach(t => t.style.borderColor = 'transparent');
+                
+                // Add active class to clicked thumbnail
+                this.style.borderColor = 'var(--primary)';
+            });
+        });
+        
+        // Form submission
+        const bookingForm = document.querySelector('.booking-form');
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! Our leasing specialist will contact you shortly to schedule a viewing.');
+            this.reset();
+        });
+
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Your message has been sent to the agent. They will respond within 24 hours.');
+            this.reset();
+        });
+
+        // Set minimum date for move-in date
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        document.getElementById('move-date').min = `${yyyy}-${mm}-${dd}`;
+    </script>
+</body>
+</html>

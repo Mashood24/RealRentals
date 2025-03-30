@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a cREN Agent | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .registration-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .benefits-sidebar {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            align-self: start;
+            position: sticky;
+            top: 100px;
+        }
+
+        .benefits-sidebar h2 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .benefits-sidebar h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .benefit-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 3px;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 8px;
+        }
+
+        .benefit-content p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-card {
+            background-color: var(--light);
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent);
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .registration-form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            color: #555;
+        }
+
+        .registration-form .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .registration-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .registration-form label.required::after {
+            content: '*';
+            color: #e74c3c;
+            margin-left: 5px;
+        }
+
+        .registration-form input,
+        .registration-form select,
+        .registration-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .registration-form textarea {
+            min-height: 120px;
+        }
+
+        .registration-form input:focus,
+        .registration-form select:focus,
+        .registration-form textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .file-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+        }
+
+        .file-upload i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .file-upload p {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .file-upload small {
+            color: #777;
+            font-size: 12px;
+        }
+
+        #file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #555;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            margin-top: 3px;
+        }
+
+        .checkbox-label a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .checkbox-label a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-prompt {
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .login-prompt a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-prompt a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 992px) {
+            .registration-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-sidebar {
+                position: static;
+                order: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 80px 0 40px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 60px 0 30px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .registration-form-container,
+            .benefits-sidebar {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Join Our Network of Professional Agents</h1>
+            <p>Grow your real estate business with cREN Rentals - Kenya's fastest growing rental platform</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="properties.html" class="nav-link">Properties</a>
+                <a href="agents.html" class="nav-link">Agents</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="registration-container">
+            <div class="registration-form-container">
+                <div class="form-header">
+                    <h2>Agent Registration</h2>
+                    <p>Complete the form below to join our network of professional agents</p>
+                </div>
+                <form class="registration-form" id="agentRegistrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="required">First Name</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="required">Last Name</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="required">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="required">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company Name (if applicable)</label>
+                        <input type="text" id="company">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialty" class="required">Specialty</label>
+                        <select id="specialty" required>
+                            <option value="">Select your specialty</option>
+                            <option value="residential">Residential Rentals</option>
+                            <option value="commercial">Commercial Properties</option>
+                            <option value="student">Student Accommodation</option>
+                            <option value="luxury">Luxury Apartments</option>
+                            <option value="vacation">Vacation Rentals</option>
+                            <option value="property-management">Property Management</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="locations" class="required">Areas You Cover</label>
+                        <input type="text" id="locations" placeholder="e.g. Westlands, Kilimani, Karen" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience" class="required">Years of Experience</label>
+                        <select id="experience" required>
+                            <option value="">Select years of experience</option>
+                            <option value="0-1">0-1 years</option>
+                            <option value="1-3">1-3 years</option>
+                            <option value="3-5">3-5 years</option>
+                            <option value="5+">5+ years</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="license" class="required">Real Estate License Number</label>
+                        <input type="text" id="license" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bio" class="required">Professional Bio</label>
+                        <textarea id="bio" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="required">Upload Your Photo</label>
+                        <div class="file-upload" id="photoUpload">
+                            <i class="fas fa-camera"></i>
+                            <p>Click to upload your professional photo</p>
+                            <small>JPG or PNG, max 5MB</small>
+                            <div id="file-name"></div>
+                        </div>
+                        <input type="file" id="photo" accept="image/*" style="display: none;" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Certification Documents</label>
+                        <div class="file-upload" id="docUpload">
+                            <i class="fas fa-file-upload"></i>
+                            <p>Click to upload certifications</p>
+                            <small>PDF, JPG or PNG, max 10MB</small>
+                            <div id="doc-file-name"></div>
+                        </div>
+                        <input type="file" id="documents" accept=".pdf,.jpg,.jpeg,.png" style="display: none;" multiple>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" required>
+                                I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
+                            </label>
+                        </div>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" required>
+                                I certify that all information provided is accurate
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Application</button>
+                    <p class="login-prompt">
+                        Already have an agent account? <a href="login.html">Log in here</a>
+                    </p>
+                </form>
+            </div>
+
+            <div class="benefits-sidebar">
+                <h2>Why Join cREN?</h2>
+                
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Access to Thousands of Renters</h3>
+                        <p>Connect with active property seekers across Kenya through our growing platform.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Powerful Marketing Tools</h3>
+                        <p>Showcase your listings with professional photos, virtual tours, and featured placements.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Performance Analytics</h3>
+                        <p>Track your listing views, inquiries, and conversions with our detailed dashboard.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-badge-check"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Verified Professional Status</h3>
+                        <p>Build trust with potential clients through our verified agent program.</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="benefit-content">
+                        <h3>Competitive Commission Rates</h3>
+                        <p>Enjoy some of the best commission structures in the Kenyan market.</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        Joining cREN Rentals transformed my business. Within 3 months, I doubled my client base and now manage 25 properties through their platform. The tools and support are exceptional.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Mwangi">
+                        <div class="author-info">
+                            <h4>James Mwangi</h4>
+                            <p>cREN Agent since 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Your trusted partner in finding the perfect rental home. We connect tenants with quality properties across Kenya.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="properties.html">Properties</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Plaza, Westlands Road, Nairobi, Kenya</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 700 000000</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>agents@crenrentals.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 cREN Rentals. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // File upload handling
+        document.getElementById('photoUpload').addEventListener('click', function() {
+            document.getElementById('photo').click();
+        });
+
+        document.getElementById('photo').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file selected';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        document.getElementById('docUpload').addEventListener('click', function() {
+            document.getElementById('documents').click();
+        });
+
+        document.getElementById('documents').addEventListener('change', function(e) {
+            const fileCount = e.target.files.length;
+            document.getElementById('doc-file-name').textContent = 
+                fileCount > 0 ? `${fileCount} file(s) selected` : 'No files selected';
+        });
+
+        // Form submission
+        document.getElementById('agentRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form validation would go here in a real implementation
+            // For demo purposes, we'll just show an alert
+            
+            alert('Thank you for your application! Our team will review your information and contact you within 3 business days.');
+            this.reset();
+            document.getElementById('file-name').textContent = '';
+            document.getElementById('doc-file-name').textContent = '';
+        });
+
+        // Add required field indicators
+        document.querySelectorAll('.required').forEach(label => {
+            if (!label.querySelector('span')) {
+                const span = document.createElement('span');
+                span.className = 'required-indicator';
+                span.textContent = ' *';
+                span.style.color = '#e74c3c';
+                label.appendChild(span);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PropertyPro | Find Your Perfect Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #fd79a8;
+            --success: #00b894;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 15px auto;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .advertise-btn {
+            background-color: white;
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .advertise-btn:hover {
+            background-color: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Property Listings */
+        .property-listings {
+            background-color: white;
+        }
+
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .property-location i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .property-amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .amenity {
+            background-color: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .property-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .property-type {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Quick Links */
+        .quick-links {
+            background-color: #f9f9f9;
+        }
+
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .links-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .links-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .links-list {
+            list-style: none;
+        }
+
+        .links-list li {
+            margin-bottom: 12px;
+        }
+
+        .links-list a {
+            color: #555;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 5px 0;
+        }
+
+        .links-list a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to right, var(--dark), #1a1a1a);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 50px 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .property-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 40px 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .advertise-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="#" class="logo">c<span style="color: var(--accent)">REN</span></a>
+            <nav class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="propertylisting.html" class="nav-link">Properties</a>
+                <a href="aboutUs.html" class="nav-link">About Us</a>
+                <a href="https://wa.me/+254796538128" class="nav-link">Contact</a>
+                <a href="agents.html" class="nav-link">Agents</a>
+                <a href="renting.html" class="nav-link">Logout</a>
+                <a href="advertisewithus.html" class="advertise-btn">Advertise With Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Property Listings -->
+    <section class="section property-listings">
+        <div class="container">
+            <h2 class="section-title">Featured Properties</h2>
+            <div class="property-grid">
+                <!-- Property 1 -->
+                <a href="singlerooms.html" class="property-card reveal">
+                    <img src="92.jpg" alt="Hollow Hills Apartments" class="property-img">
+                    <div class="property-info">
+                        <h3 class="property-title">Hollow Hills Apartments</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Zillow - 6625 N
+                        </div>
+                        <div class="property-price">KES25,299/month</div>
+                        <div class="property-amenities">
+                            <span class="amenity">2 Beds</span>
+                            <span class="amenity">1 Bath</span>
+                            <span class="amenity">Balcony</span>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-type">Apartment</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Property 2 -->
+                <a href="singlerooms.html" class="property-card reveal">
+                    <img src="91.jpg" alt="2 Bedroom Apartments For Rent" class="property-img">
+                    <div class="property-info">
+                        <h3 class="property-title">2 Bedroom Apartments</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Zillow - Spacious living
+                        </div>
+                        <div class="property-price">KES40,500/month</div>
+                        <div class="property-amenities">
+                            <span class="amenity">2 Beds</span>
+                            <span class="amenity">2 Baths</span>
+                            <span class="amenity">Parking</span>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-type">Apartment</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Property 3 -->
+                <a href="singelrooms.html" class="property-card reveal">
+                    <img src="93.jpg" alt="Cardinal Pointe Townhomes" class="property-img">
+                    <div class="property-info">
+                        <h3 class="property-title">Cardinal Pointe Townhomes</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Zillow - Modern design
+                        </div>
+                        <div class="property-price">$50,800/month</div>
+                        <div class="property-amenities">
+                            <span class="amenity">3 Beds</span>
+                            <span class="amenity">2.5 Baths</span>
+                            <span class="amenity">Garage</span>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-type">Townhouse</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Property 4 -->
+                <a href="sharedrooms.html" class="property-card reveal">
+                    <img src="94.jpg" alt="House Beautiful Property" class="property-img">
+                    <div class="property-info">
+                        <h3 class="property-title">Beautiful Home</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Dream neighborhood
+                        </div>
+                        <div class="property-price">KES60,299/month</div>
+                        <div class="property-amenities">
+                            <span class="amenity">4 Beds</span>
+                            <span class="amenity">3 Baths</span>
+                            <span class="amenity">Garden</span>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-type">House</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Property 5 -->
+                <a href="sharedrooms.html" class="property-card reveal">
+                    <img src="95.jpg" alt="Cozy Townhouse" class="property-img">
+                    <div class="property-info">
+                        <h3 class="property-title">Cozy Townhouse</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Affordable living
+                        </div>
+                        <div class="property-price">KES25,359/month</div>
+                        <div class="property-amenities">
+                            <span class="amenity">2 Beds</span>
+                            <span class="amenity">1.5 Baths</span>
+                            <span class="amenity">Patio</span>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-type">Townhouse</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Property 6 -->
+                <a href="sharedrooms.html" class="property-card reveal">
+                    <img src="97.jpg" alt="Chic Apartment" class="property-img">
+                    <div class="property-info">
+                        <h3 class="property-title">Chic Apartment</h3>
+                        <div class="property-location">
+                            <i class="fas fa-map-marker-alt"></i> Urban lifestyle
+                        </div>
+                        <div class="property-price">$15,199/month</div>
+                        <div class="property-amenities">
+                            <span class="amenity">1 Bed</span>
+                            <span class="amenity">1 Bath</span>
+                            <span class="amenity">Gym Access</span>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-type">Apartment</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="section quick-links">
+        <div class="container">
+            <h2 class="section-title">Browse Properties</h2>
+            <div class="links-container">
+                <!-- Column 1 -->
+                <div class="links-column">
+                    <h3>Featured Properties</h3>
+                    <ul class="links-list">
+                        <li><a href="#">Town Houses</a></li>
+                        <li><a href="#">Bed Sitters</a></li>
+                        <li><a href="#">Rooms</a></li>
+                        <li><a href="#">Studio Apartments</a></li>
+                        <li><a href="#">Farms</a></li>
+                        <li><a href="#">Industrial Properties</a></li>
+                        <li><a href="#">Shops</a></li>
+                        <li><a href="#">Office Spaces</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="links-column">
+                    <h3>Properties For Sale</h3>
+                    <ul class="links-list">
+                        <li><a href="commercialproperties.html">Commercial Properties</a></li>
+                        <li><a href="#">Farm</a></li>
+                        <li><a href="#">Flats/Apartments</a></li>
+                        <li><a href="#">Houses</a></li>
+                        <li><a href="#">Industrial Property</a></li>
+                        <li><a href="#">Land</a></li>
+                        <li><a href="#">Townhouse</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="links-column">
+                    <h3>Properties For Rent</h3>
+                    <ul class="links-list">
+                        <li><a href="commercialproperties.html">Commercial Properties</a></li>
+                        <li><a href="#">Farm</a></li>
+                        <li><a href="#">Flats/Apartments</a></li>
+                        <li><a href="#">Houses</a></li>
+                        <li><a href="#">Industrial Property</a></li>
+                        <li><a href="#">Land</a></li>
+                        <li><a href="#">Townhouse</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div class="links-column">
+                    <h3>Popular Locations</h3>
+                    <ul class="links-list">
+                        <li><a href="googlemaps.html">Nairobi</a></li>
+                        <li><a href="googlemaps.html">Mombasa</a></li>
+                        <li><a href="googlemaps.html">Nakuru</a></li>
+                        <li><a href="googlemaps.html">Kajiado</a></li>
+                        <li><a href="googlemaps.html">Kisumu</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">c<span style="color: var(--accent)">REN</span></div>
+                    <p>Your trusted partner in finding the perfect rental home. We connect tenants with quality properties across the region.</p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/abiola.mashood.5245" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/abiolamashood10" class="social-link"><i class="fab fa-x"></i></a>
+                        <a href="https://www.instagram.com/mashrichvik/?next=%2F" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/channel/UCBGt9u6_4t7EggIpPaGs76Q" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="propertylisting.html">Properties</a></li>
+                        <li><a href="aboutUs.html">About Us</a></li>
+                        <li><a href="https://wa.me/+254796538128">Contact</a></li>
+                        <li><a href="#">Agents</a></li>
+                        <li><a href="#">Advertise With Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="footer-title">Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Kisumu-Maseno Road</li>
+                        <li><i class="fas fa-phone"></i> +254 796 538128</li>
+                        <li><i class="fas fa-envelope"></i> info@propertypro.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 PropertyPro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        function startAnimations() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            function checkScroll() {
+                revealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('active');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+        }
+
+        // Start animations when page loads
+        window.addEventListener('load', startAnimations);
+    </script>
+</body>
+</html>

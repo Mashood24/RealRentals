@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affordable Shared Rooms | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .search-bar {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .search-group {
+            margin-bottom: 0;
+        }
+
+        .search-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .search-group input,
+        .search-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-end;
+        }
+
+        .search-btn:hover {
+            background-color: #f5d97a;
+            transform: translateY(-2px);
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-intro h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .page-intro p {
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .view-toggle {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .view-btn {
+            padding: 8px 15px;
+            background-color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .view-btn:first-child {
+            border-right: 1px solid #ddd;
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .room-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .room-card-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .room-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover .room-card-image img {
+            transform: scale(1.05);
+        }
+
+        .room-card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .room-card-info {
+            padding: 20px;
+        }
+
+        .room-card-info h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .room-card-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .room-card-location i {
+            color: var(--primary);
+        }
+
+        .room-card-details {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .detail-item i {
+            color: var(--primary);
+        }
+
+        .room-card-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .room-card-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #777;
+        }
+
+        .room-card-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .room-card-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .room-card-btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .room-card-btn-primary:hover {
+            background-color: #238f81;
+        }
+
+        .room-card-btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .room-card-btn-outline:hover {
+            background-color: rgba(42, 157, 143, 0.1);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+
+        .page-link {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: white;
+            color: var(--dark);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+
+        .page-link:hover, .page-link.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .features-section {
+            background-color: white;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .features-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .feature-card p {
+            color: #555;
+        }
+
+        .cta-section {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background-color: #f5d97a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 80px 0 40px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 60px 0 30px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Affordable Shared Rooms in Available</h1>
+            <p>Find comfortable and budget-friendly shared accommodations in prime locations across the country</p>
+            
+            <div class="search-bar">
+                <form class="search-form">
+                    <div class="search-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Where do you want to live?">
+                    </div>
+                    <div class="search-group">
+                        <label for="move-in">Move-In Date</label>
+                        <input type="date" id="move-in">
+                    </div>
+                    <div class="search-group">
+                        <label for="budget">Max Budget</label>
+                        <select id="budget">
+                            <option value="">Any Budget</option>
+                            <option value="5000">KES 5,000</option>
+                            <option value="10000">KES 10,000</option>
+                            <option value="15000">KES 15,000</option>
+                            <option value="20000">KES 20,000</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="renting.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="propertylisting.html" class="nav-link">Home</a>
+                <a href="propertylisting.html" class="nav-link">Properties</a>
+                <a href="sharedrooms.html" class="nav-link active">Shared Rooms</a>
+                <a href="agents.html" class="nav-link">Agents</a>
+                <a href="https://wa.me/+254796538128" class="nav-link">Contact</a>
+                <a href="renting.html" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-intro">
+            <h2>Find Your Perfect Shared Space</h2>
+            <p>Shared rooms offer an affordable way to live in great locations while meeting new people. Browse our selection of vetted shared accommodations below.</p>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <span class="filter-label">Sort by:</span>
+                <select class="filter-select">
+                    <option>Recommended</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Newest Listings</option>
+                    <option>Best Rated</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">View:</span>
+                <div class="view-toggle">
+                    <button class="view-btn active"><i class="fas fa-th"></i></button>
+                    <button class="view-btn"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="rooms-grid">
+            <div class="room-card">
+                <div class="room-card-image">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Shared room in Westlands">
+                    <span class="room-card-badge">2 Beds Left</span>
+                </div>
+                <div class="room-card-info">
+                    <h3>Cozy Shared Room - Westlands</h3>
+                    <div class="room-card-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Westlands, Nairobi</span>
+                    </div>
+                    <div class="room-card-details">
+                        <div class="detail-item">
+                            <i class="fas fa-bed"></i>
+                            <span>2 Beds</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>18 sqm</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>3 Roommates</span>
+                        </div>
+                    </div>
+                    <div class="room-card-price">KES 18,500 <span>/month</span></div>
+                    <div class="room-card-actions">
+                        <a href="sharedroomspayment.html" class="room-card-btn room-card-btn-primary">Book Room</a>
+                        <a href="https://wa.me/+254796538128" class="room-card-btn room-card-btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-card-image">
+                    <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Student shared room">
+                    <span class="room-card-badge">Student Preferred</span>
+                </div>
+                <div class="room-card-info">
+                    <h3>Student Shared Room - Kilimani</h3>
+                    <div class="room-card-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kilimani, Nairobi</span>
+                    </div>
+                    <div class="room-card-details">
+                        <div class="detail-item">
+                            <i class="fas fa-bed"></i>
+                            <span>3 Beds</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>22 sqm</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 Roommates</span>
+                        </div>
+                    </div>
+                    <div class="room-card-price">KES 17,999 <span>/month</span></div>
+                    <div class="room-card-actions">
+                        <a href="sharedroomspayment.html" class="room-card-btn room-card-btn-primary">Book Room</a>
+                        <a href="https://wa.me/+254796538128" class="room-card-btn room-card-btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-card-image">
+                    <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Shared apartment">
+                    <span class="room-card-badge">Female Only</span>
+                </div>
+                <div class="room-card-info">
+                    <h3>Ladies Shared Apartment - Ngara</h3>
+                    <div class="room-card-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Ngara, Nairobi</span>
+                    </div>
+                    <div class="room-card-details">
+                        <div class="detail-item">
+                            <i class="fas fa-bed"></i>
+                            <span>2 Beds</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>20 sqm</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>1 Roommate</span>
+                        </div>
+                    </div>
+                    <div class="room-card-price">KES 19,599 <span>/month</span></div>
+                    <div class="room-card-actions">
+                        <a href="sharedroomspayment.html" class="room-card-btn room-card-btn-primary">Book Room</a>
+                        <a href="https://wa.me/+254796538128" class="room-card-btn room-card-btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-card-image">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80" alt="Shared room with balcony">
+                    <span class="room-card-badge">Balcony</span>
+                </div>
+                <div class="room-card-info">
+                    <h3>Shared Room with Balcony - CBD</h3>
+                    <div class="room-card-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Nairobi CBD</span>
+                    </div>
+                    <div class="room-card-details">
+                        <div class="detail-item">
+                            <i class="fas fa-bed"></i>
+                            <span>2 Beds</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>16 sqm</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>1 Roommate</span>
+                        </div>
+                    </div>
+                    <div class="room-card-price">KES 20,299 <span>/month</span></div>
+                    <div class="room-card-actions">
+                        <a href="sharedroomspayment.html" class="room-card-btn room-card-btn-primary">Book Room</a>
+                        <a href="https://wa.me/+254796538128" class="room-card-btn room-card-btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-card-image">
+                    <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Shared room in Mombasa">
+                    <span class="room-card-badge">Beach Nearby</span>
+                </div>
+                <div class="room-card-info">
+                    <h3>Shared Room - Nyali, Mombasa</h3>
+                    <div class="room-card-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Nyali, Mombasa</span>
+                    </div>
+                    <div class="room-card-details">
+                        <div class="detail-item">
+                            <i class="fas fa-bed"></i>
+                            <span>3 Beds</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>25 sqm</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>2 Roommates</span>
+                        </div>
+                    </div>
+                    <div class="room-card-price">KES 25,199 <span>/month</span></div>
+                    <div class="room-card-actions">
+                        <a href="sharedroomspayment.html" class="room-card-btn room-card-btn-primary">Book Room</a>
+                        <a href="https://wa.me/+254796538128" class="room-card-btn room-card-btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div class="room-card-image">
+                    <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Shared room in Kileleshwa">
+                    <span class="room-card-badge">Quiet Area</span>
+                </div>
+                <div class="room-card-info">
+                    <h3>Shared Room - Kileleshwa</h3>
+                    <div class="room-card-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kileleshwa, Nairobi</span>
+                    </div>
+                    <div class="room-card-details">
+                        <div class="detail-item">
+                            <i class="fas fa-bed"></i>
+                            <span>2 Beds</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>18 sqm</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-user-friends"></i>
+                            <span>1 Roommate</span>
+                        </div>
+                    </div>
+                    <div class="room-card-price">KES 20,599 <span>/month</span></div>
+                    <div class="room-card-actions">
+                        <a href="sharedroomspayment.html" class="room-card-btn room-card-btn-primary">Book Room</a>
+                        <a href="https://wa.me/+254796538128" class="room-card-btn room-card-btn-outline">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link">Next</a>
+        </div>
+    </div>
+
+    <section class="features-section">
+        <div class="features-container">
+            <h2>Why Choose Shared Accommodation?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Affordable Living</h3>
+                    <p>Shared rooms offer significant cost savings compared to renting alone, allowing you to live in better locations for less.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Built-in Community</h3>
+                    <p>Meet new people and make friends with your roommates in a comfortable living environment.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Prime Locations</h3>
+                    <p>Access desirable neighborhoods that might otherwise be outside your budget when renting alone.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Fully Furnished</h3>
+                    <p>Most shared rooms come fully furnished, saving you the cost and hassle of buying furniture.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Shared Amenities</h3>
+                    <p>Enjoy access to shared kitchens, living areas, and sometimes even cleaning services.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Vetted Roommates</h3>
+                    <p>We verify all roommates to ensure compatibility and safety in shared living situations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Can't Find What You're Looking For?</h2>
+            <p>Let our rental experts help you find the perfect shared accommodation tailored to your needs and preferences.</p>
+            <div>
+                <a href="contact.html" class="btn btn-primary">Contact Our Team</a>
+                <a href="agents.html" class="btn btn-outline">Find an Agent</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Your trusted partner in finding the perfect rental home. We connect tenants with quality properties across Kenya.</p>
+                <div class="social-links">
+                <a href="https://web.facebook.com/abiola.mashood.5245" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/abiolamashood10" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/mashrichvik/?next=%2F" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="propertylisting.html">Home</a></li>
+                    <li><a href="propertylisting.html">Properties</a></li>
+                    <li><a href="sharedrooms.html">Shared Rooms</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="https://wa.me/+254796538128">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Plaza, Kisumu-Maseno Road, Kisumu, Kenya</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 796 538128</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@crenrentals.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 cREN Rentals. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // View toggle functionality
+        const viewBtns = document.querySelectorAll('.view-btn');
+        const roomsGrid = document.querySelector('.rooms-grid');
+        
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                viewBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                if (this.querySelector('.fa-list')) {
+                    roomsGrid.style.gridTemplateColumns = '1fr';
+                } else {
+                    roomsGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(300px, 1fr))';
+                }
+            });
+        });
+
+        // Room card hover effect
+        const roomCards = document.querySelectorAll('.room-card');
+        roomCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const image = card.querySelector('.room-card-image img');
+                image.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const image = card.querySelector('.room-card-image img');
+                image.style.transform = 'scale(1)';
+            });
+        });
+
+        // Search form submission
+        const searchForm = document.querySelector('.search-form');
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Search functionality would be implemented here with backend integration');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Rooms for Rent | cREN Rentals - Affordable Housing in Kenya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 80px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .page-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-intro h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .page-intro p {
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .filter-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-title i {
+            color: var(--primary);
+        }
+
+        .filter-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .filter-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .property-info {
+            padding: 20px;
+        }
+
+        .property-info h3 {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .property-location i {
+            color: var(--primary);
+        }
+
+        .property-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .feature i {
+            color: var(--primary);
+        }
+
+        .property-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .property-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #777;
+        }
+
+        .property-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(42, 157, 143, 0.1);
+        }
+
+        .benefits-section {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .benefits-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .benefits-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 15px auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .benefit-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .properties-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 60px 0 30px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-intro h2 {
+                font-size: 1.5rem;
+            }
+            
+            .property-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>Affordable Single Rooms in Kenya</h1>
+            <p>Find comfortable, secure single rooms in prime locations across major Kenyan cities</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="propertylisting.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="propertylisting.html" class="nav-link">Home</a>
+                <a href="propertylisting.html" class="nav-link">Properties</a>
+                <a href="aboutUs.html" class="nav-link">About Us</a>
+                <a href="https://wa.me/+254796538128" class="nav-link">Contact</a>
+                <a href="renting.html" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-intro">
+            <h2>Single Rooms for Rent</h2>
+            <p>Browse our selection of affordable single rooms in secure locations across Kenya. Each room is carefully vetted to ensure quality, safety, and comfort for our tenants.</p>
+        </div>
+
+        <div class="filter-section">
+            <h3 class="filter-title"><i class="fas fa-sliders-h"></i> Filter Rooms</h3>
+            <div class="filter-options">
+                <div class="filter-group">
+                    <label for="location">Location</label>
+                    <select id="location">
+                        <option value="">All Locations</option>
+                        <option value="nairobi">Nairobi</option>
+                        <option value="mombasa">Mombasa</option>
+                        <option value="kisumu">Kisumu</option>
+                        <option value="nakuru">Nakuru</option>
+                        <option value="eldoret">Eldoret</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-range">Price Range (KES)</label>
+                    <select id="price-range">
+                        <option value="">Any Price</option>
+                        <option value="0-5000">Under 5,000</option>
+                        <option value="5000-10000">5,000 - 10,000</option>
+                        <option value="10000-15000">10,000 - 15,000</option>
+                        <option value="15000-20000">15,000 - 20,000</option>
+                        <option value="20000+">20,000+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="amenities">Amenities</label>
+                    <select id="amenities">
+                        <option value="">All Amenities</option>
+                        <option value="wifi">WiFi</option>
+                        <option value="parking">Parking</option>
+                        <option value="laundry">Laundry</option>
+                        <option value="kitchen">Shared Kitchen</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn"><i class="fas fa-filter"></i> Apply Filters</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="properties-grid">
+            <!-- Room 1 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Cozy single room in Nairobi">
+                    <span class="property-badge">Available Now</span>
+                </div>
+                <div class="property-info">
+                    <h3>Cozy Single Room</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Westlands, Nairobi
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i> WiFi
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i> Shared Kitchen
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tshirt"></i> Laundry
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i> Secure
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 12,500 <span>/month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="singelroomsdetails.html" class="btn btn-primary">View Details</a>
+                        <a href="https://wa.me/+254796538128" class="btn btn-outline">Contact Agent</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 2 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1680&q=80" alt="Modern single room in Mombasa">
+                    <span class="property-badge">Available Now</span>
+                </div>
+                <div class="property-info">
+                    <h3>Modern Single Room</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Nyali, Mombasa
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i> WiFi
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-swimming-pool"></i> Pool Access
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i> Shared Kitchen
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i> Secure
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 15,000 <span>/month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="singelroomsdetails.html" class="btn btn-primary">View Details</a>
+                        <a href="https://wa.me/+254796538128" class="btn btn-outline">Contact Agent</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 3 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80" alt="Affordable single room in Kisumu">
+                    <span class="property-badge">Available Now</span>
+                </div>
+                <div class="property-info">
+                    <h3>Affordable Single Room</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Milimani, Kisumu
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i> Shared Kitchen
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tshirt"></i> Laundry
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i> Secure
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 8,500 <span>/month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="singelroomsdetails.html" class="btn btn-primary">View Details</a>
+                        <a href="https://wa.me/+254796538128" class="btn btn-outline">Contact Agent</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 4 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Furnished single room in Nakuru">
+                    <span class="property-badge">Available Now</span>
+                </div>
+                <div class="property-info">
+                    <h3>Furnished Single Room</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Lanet, Nakuru
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i> WiFi
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i> Shared Kitchen
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i> Secure
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i> Parking
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 10,000 <span>/month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="singelroomsdetails.html" class="btn btn-primary">View Details</a>
+                        <a href="https://wa.me/+254796538128" class="btn btn-outline">Contact Agent</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 5 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Studio-style single room in Eldoret">
+                    <span class="property-badge">Available Now</span>
+                </div>
+                <div class="property-info">
+                    <h3>Studio-Style Single Room</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Elgon View, Eldoret
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i> WiFi
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i> Kitchenette
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i> Secure
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-car"></i> Parking
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 11,500 <span>/month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="singelroomsdetails.html" class="btn btn-primary">View Details</a>
+                        <a href="https://wa.me/+254796538128" class="btn btn-outline">Contact Agent</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Room 6 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" alt="Executive single room in Nairobi CBD">
+                    <span class="property-badge">Available Now</span>
+                </div>
+                <div class="property-info">
+                    <h3>Executive Single Room</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i> Nairobi CBD
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i> WiFi
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i> Shared Kitchen
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-dumbbell"></i> Gym Access
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-lock"></i> Secure
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 18,000 <span>/month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="singelroomsdetails.html" class="btn btn-primary">View Details</a>
+                        <a href="https://wa.me/+254796538128" class="btn btn-outline">Contact Agent</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="benefits-section">
+            <div class="benefits-container">
+                <h2 class="benefits-title">Why Rent a Single Room with cREN?</h2>
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Secure Living</h3>
+                        <p>All our single rooms are in secure buildings with 24/7 security, CCTV surveillance, and controlled access.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-wallet"></i>
+                        <h3>Affordable Rates</h3>
+                        <p>We offer competitive pricing with flexible payment options to suit different budgets across Kenya.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Prime Locations</h3>
+                        <p>Our single rooms are strategically located near transport links, shopping centers, and business districts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Can't Find What You're Looking For?</h2>
+            <p>Our agents can help you find the perfect single room that matches your needs and budget.</p>
+            <a href="https://wa.me/+254796538128" class="btn btn-primary">Contact Our Team</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Your trusted partner in finding the perfect rental home. We connect tenants with quality properties across Kenya.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="propertylisting.html">Home</a></li>
+                    <li><a href="propertylisting.html">Properties</a></li>
+                    <li><a href="aboutUs.html">About Us</a></li>
+                    <li><a href="https://wa.me/+254796538128">Contact</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Plaza, Westlands Road, Nairobi, Kenya</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 796 538128</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@crenrentals.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 cREN Rentals. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple filter functionality
+        document.querySelector('.filter-btn').addEventListener('click', function() {
+            const location = document.getElementById('location').value;
+            const priceRange = document.getElementById('price-range').value;
+            const amenities = document.getElementById('amenities').value;
+            
+            // In a real application, this would filter actual data from an API
+            // For this demo, we'll just show an alert
+            alert(`Filters applied:\nLocation: ${location || 'Any'}\nPrice Range: ${priceRange || 'Any'}\nAmenities: ${amenities || 'Any'}`);
+            
+            // Scroll to results section
+            document.querySelector('.properties-grid').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

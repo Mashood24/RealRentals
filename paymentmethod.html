@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ffcc00;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --danger: #e63946;
+            --success: #2a9d8f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(106,17,203,0.9) 0%, rgba(37,117,252,0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: var(--light);
+        }
+
+        .payment-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .payment-container:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .payment-header h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .payment-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+        }
+
+        .payment-logo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        .card-icon {
+            position: absolute;
+            right: 15px;
+            top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .expiry-cvv {
+            display: flex;
+            gap: 15px;
+        }
+
+        .expiry-cvv .form-group {
+            flex: 1;
+        }
+
+        .expiry-date {
+            display: flex;
+            gap: 10px;
+        }
+
+        .expiry-date select {
+            flex: 1;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--dark);
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background: #ffd633;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            margin-top: 20px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-method {
+            width: 40px;
+            height: 25px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            opacity: 0.7;
+        }
+
+        /* Credit card formatting */
+        #card-number {
+            letter-spacing: 1px;
+            background-image: linear-gradient(to right, #333 50%, rgba(255,255,255,0) 0%);
+            background-position: bottom;
+            background-size: 10px 1px;
+            background-repeat: repeat-x;
+            background-position-x: 0;
+            padding-left: 10px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .payment-container {
+                padding: 25px 20px;
+            }
+            
+            .expiry-cvv {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .payment-header h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* Animation */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .processing {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <div class="payment-header">
+            <div class="payment-logo">cREN</div>
+            <h2>Complete Your Booking</h2>
+            <p>Secure payment for your selected property</p>
+        </div>
+
+        <form id="payment-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="As it appears on card" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="receipt@example.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" name="card-number" placeholder="4242 4242 4242 4242" required maxlength="19">
+                <i class="fas fa-credit-card card-icon"></i>
+            </div>
+            
+            <div class="expiry-cvv">
+                <div class="form-group">
+                    <label>Expiry Date</label>
+                    <div class="expiry-date">
+                        <select id="expiry-date-month" name="expiry-date-month" required>
+                            <option value="" disabled selected>MM</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select id="expiry-date-year" name="expiry-date-year" required>
+                            <option value="" disabled selected>YY</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cvv">Security Code</label>
+                    <input type="password" id="cvv" name="cvv" placeholder="•••" required maxlength="4">
+                    <i class="fas fa-lock card-icon"></i>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" id="pay-button">
+                <i class="fas fa-lock"></i> Pay $1,200.00
+            </button>
+            
+            <div class="security-note">
+                <i class="fas fa-shield-alt"></i> Your payment is securely encrypted
+            </div>
+            
+            <div class="payment-methods">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visa/visa-original.svg" class="payment-method" alt="Visa">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mastercard/mastercard-original.svg" class="payment-method" alt="Mastercard">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" class="payment-method" alt="Apple Pay">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/paypal/paypal-original.svg" class="payment-method" alt="PayPal">
+            </div>
+            
+            <a href="propertylisting.html" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Property
+            </a>
+        </form>
+    </div>
+
+    <script>
+        // Populate expiry year dropdown with current year and next 10 years
+        const currentYear = new Date().getFullYear();
+        const expiryYearSelect = document.getElementById('expiry-date-year');
+        
+        for (let i = 0; i <= 10; i++) {
+            const year = currentYear + i;
+            const shortYear = year.toString().slice(-2);
+            const option = document.createElement('option');
+            option.value = shortYear;
+            option.text = shortYear;
+            expiryYearSelect.add(option);
+        }
+
+        // Format card number with spaces
+        const cardNumberInput = document.getElementById('card-number');
+        cardNumberInput.addEventListener('input', function(e) {
+            // Remove all non-digit characters
+            let value = e.target.value.replace(/\D/g, '');
+            
+            // Add space after every 4 digits
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            
+            // Update the input value
+            e.target.value = value;
+        });
+
+        // Form submission handling
+        const paymentForm = document.getElementById('payment-form');
+        const payButton = document.getElementById('pay-button');
+        
+        paymentForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show processing state
+            payButton.disabled = true;
+            payButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Payment';
+            payButton.classList.add('processing');
+            
+            // Simulate payment processing
+            setTimeout(function() {
+                // In a real app, you would process payment here
+                alert('Payment succesfully sent! please continue with payment on your device.');
+                payButton.innerHTML = '<i class="fas fa-check"></i> Payment Successful';
+                
+                // Redirect to confirmation page after 2 seconds
+                setTimeout(function() {
+                    window.location.href = 'succesfulbooking.html';
+                }, 2000);
+            }, 3000);
+        });
+
+        // CVV input formatting
+        const cvvInput = document.getElementById('cvv');
+        cvvInput.addEventListener('input', function(e) {
+            // Remove all non-digit characters
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    </script>
+</body>
+</html>

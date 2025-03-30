@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --error: #f44336;
+        }
+
+        /* Base styles from existing design */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(42, 157, 143, 0.1);
+        }
+
+        /* Profile specific styles */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h2 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--secondary);
+        }
+
+        .profile-info p {
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .profile-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .detail-group {
+            margin-bottom: 25px;
+        }
+
+        .detail-group h3 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .detail-label {
+            width: 150px;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            flex: 1;
+        }
+
+        .edit-icon {
+            color: var(--primary);
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .profile-section {
+            margin-bottom: 40px;
+        }
+
+        .document-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .document-card:hover {
+            border-color: var(--primary);
+            background-color: rgba(42, 157, 143, 0.05);
+        }
+
+        .document-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(42, 157, 143, 0.1);
+            border-radius: 8px;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+        .document-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .document-info p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .document-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .document-actions a {
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        .emergency-contact {
+            background-color: rgba(244, 67, 54, 0.05);
+            border-left: 4px solid var(--error);
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            margin-bottom: 20px;
+        }
+
+        .emergency-contact h4 {
+            color: var(--error);
+            margin-bottom: 10px;
+        }
+
+        .tab-container {
+            margin-bottom: 30px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #777;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: rgba(42, 157, 143, 0.05);
+        }
+
+        .upload-area i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .upload-area p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .detail-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .detail-label {
+                width: 100%;
+            }
+            
+            .header {
+                padding: 40px 0 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .document-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .document-actions {
+                justify-content: center;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="account.html">My Account</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>My Profile</span>
+            </div>
+            <h1>Tenant Profile</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Profile Photo">
+                </div>
+                <div class="profile-info">
+                    <h2>John Mwangi</h2>
+                    <p>Tenant since June 2022</p>
+                    <div class="profile-rating">
+                        <i class="fas fa-star"></i>
+                        <span>4.8</span>
+                        <span>(12 reviews)</span>
+                    </div>
+                </div>
+                <div style="margin-left: auto;">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </button>
+                </div>
+            </div>
+
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="personal">Personal Information</div>
+                    <div class="tab" data-tab="rental">Rental Details</div>
+                    <div class="tab" data-tab="documents">Documents</div>
+                    <div class="tab" data-tab="settings">Settings</div>
+                </div>
+
+                <div class="tab-content active" id="personal-tab">
+                    <div class="profile-details">
+                        <div>
+                            <div class="detail-group">
+                                <h3>Basic Information</h3>
+                                <div class="detail-item">
+                                    <div class="detail-label">Full Name</div>
+                                    <div class="detail-value">
+                                        John Mwangi
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="name"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Date of Birth</div>
+                                    <div class="detail-value">
+                                        May 15, 1990
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="dob"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Gender</div>
+                                    <div class="detail-value">
+                                        Male
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="gender"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">National ID</div>
+                                    <div class="detail-value">
+                                        12345678
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="id"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-group">
+                                <h3>Contact Information</h3>
+                                <div class="detail-item">
+                                    <div class="detail-label">Email</div>
+                                    <div class="detail-value">
+                                        john.mwangi@example.com
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="email"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Phone</div>
+                                    <div class="detail-value">
+                                        +254 712 345 678
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="phone"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Alternate Phone</div>
+                                    <div class="detail-value">
+                                        +254 723 456 789
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="alt-phone"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="detail-group">
+                                <h3>Emergency Contact</h3>
+                                <div class="emergency-contact">
+                                    <h4>Important: Update your emergency contact</h4>
+                                    <p>This information will only be used in case of emergencies</p>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Name</div>
+                                    <div class="detail-value">
+                                        Mary Wanjiku
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="emergency-name"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Relationship</div>
+                                    <div class="detail-value">
+                                        Sister
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="emergency-relation"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Phone</div>
+                                    <div class="detail-value">
+                                        +254 701 234 567
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="emergency-phone"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-group">
+                                <h3>Employment Information</h3>
+                                <div class="detail-item">
+                                    <div class="detail-label">Occupation</div>
+                                    <div class="detail-value">
+                                        Software Developer
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="occupation"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Employer</div>
+                                    <div class="detail-value">
+                                        Tech Solutions Ltd
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="employer"></i>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Work Phone</div>
+                                    <div class="detail-value">
+                                        +254 20 123 4567
+                                        <i class="fas fa-pencil-alt edit-icon" data-field="work-phone"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="rental-tab">
+                    <div class="profile-section">
+                        <h3 class="section-title">Current Rental</h3>
+                        <div class="detail-item">
+                            <div class="detail-label">Property</div>
+                            <div class="detail-value">
+                                Westlands Apartments, Unit 4B
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Room Type</div>
+                            <div class="detail-value">
+                                Shared Room (2 beds)
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Move-In Date</div>
+                            <div class="detail-value">
+                                June 15, 2022
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Lease End Date</div>
+                            <div class="detail-value">
+                                June 14, 2023 (Auto-renewal enabled)
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Monthly Rent</div>
+                            <div class="detail-value">
+                                KES 8,500
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Payment Method</div>
+                            <div class="detail-value">
+                                Autopay (Visa •••• 4242)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3 class="section-title">Rental History</h3>
+                        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <strong>Kilimani Flats, Studio Apartment</strong>
+                                <span>March 2020 - May 2022</span>
+                            </div>
+                            <p style="color: #777; font-size: 14px;">Positive reference from landlord</p>
+                        </div>
+                        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <strong>Kileleshwa Shared House</strong>
+                                <span>January 2018 - February 2020</span>
+                            </div>
+                            <p style="color: #777; font-size: 14px;">Positive reference from landlord</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="documents-tab">
+                    <div class="profile-section">
+                        <h3 class="section-title">My Documents</h3>
+                        <p style="margin-bottom: 20px;">Upload and manage your rental documents securely.</p>
+                        
+                        <div class="upload-area">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <h4>Upload New Document</h4>
+                            <p>Drag and drop files here or click to browse</p>
+                            <button class="btn btn-outline">
+                                <i class="fas fa-plus"></i> Select Files
+                            </button>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon">
+                                <i class="fas fa-file-contract"></i>
+                            </div>
+                            <div class="document-info">
+                                <h4>Lease Agreement</h4>
+                                <p>Uploaded June 10, 2022 • PDF • 2.4MB</p>
+                            </div>
+                            <div class="document-actions">
+                                <a href="#"><i class="fas fa-download"></i> Download</a>
+                                <a href="#"><i class="fas fa-trash"></i> Delete</a>
+                            </div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="document-info">
+                                <h4>National ID Copy</h4>
+                                <p>Uploaded June 5, 2022 • JPG • 1.1MB</p>
+                            </div>
+                            <div class="document-actions">
+                                <a href="#"><i class="fas fa-download"></i> Download</a>
+                                <a href="#"><i class="fas fa-trash"></i> Delete</a>
+                            </div>
+                        </div>
+
+                        <div class="document-card">
+                            <div class="document-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            <div class="document-info">
+                                <h4>Employment Letter</h4>
+                                <p>Uploaded June 5, 2022 • PDF • 1.8MB</p>
+                            </div>
+                            <div class="document-actions">
+                                <a href="#"><i class="fas fa-download"></i> Download</a>
+                                <a href="#"><i class="fas fa-trash"></i> Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="settings-tab">
+                    <div class="profile-section">
+                        <h3 class="section-title">Account Settings</h3>
+                        <div class="detail-item">
+                            <div class="detail-label">Email Notifications</div>
+                            <div class="detail-value">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <span style="margin-left: 10px;">Enabled</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">SMS Notifications</div>
+                            <div class="detail-value">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span style="margin-left: 10px;">Disabled</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Two-Factor Authentication</div>
+                            <div class="detail-value">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <span style="margin-left: 10px;">Enabled</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3 class="section-title">Security</h3>
+                        <button class="btn btn-outline" style="margin-bottom: 15px;">
+                            <i class="fas fa-key"></i> Change Password
+                        </button>
+                        <button class="btn btn-outline" style="margin-bottom: 15px;">
+                            <i class="fas fa-mobile-alt"></i> Update Phone Number
+                        </button>
+                        <button class="btn btn-outline" style="background-color: rgba(244, 67, 54, 0.1); color: var(--error); border-color: var(--error);">
+                            <i class="fas fa-sign-out-alt"></i> Logout All Devices
+                        </button>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3 class="section-title">Danger Zone</h3>
+                        <p style="margin-bottom: 15px; color: #777;">These actions are irreversible. Please proceed with caution.</p>
+                        <button class="btn btn-outline" style="background-color: rgba(244, 67, 54, 0.1); color: var(--error); border-color: var(--error);">
+                            <i class="fas fa-user-times"></i> Deactivate Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs and contents
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId + '-tab').classList.add('active');
+                });
+            });
+
+            // Edit icon functionality
+            const editIcons = document.querySelectorAll('.edit-icon');
+            editIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const field = this.getAttribute('data-field');
+                    alert('Edit ' + field + ' functionality would be implemented here');
+                    // In a real implementation, this would open an edit modal or inline edit
+                });
+            });
+
+            // Switch toggle styling
+            const style = document.createElement('style');
+            style.textContent = `
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 50px;
+                    height: 24px;
+                }
+                
+                .switch input {
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+                
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    transition: .4s;
+                }
+                
+                .slider:before {
+                    position: absolute;
+                    content: "";
+                    height: 16px;
+                    width: 16px;
+                    left: 4px;
+                    bottom: 4px;
+                    background-color: white;
+                    transition: .4s;
+                }
+                
+                input:checked + .slider {
+                    background-color: var(--primary);
+                }
+                
+                input:focus + .slider {
+                    box-shadow: 0 0 1px var(--primary);
+                }
+                
+                input:checked + .slider:before {
+                    transform: translateX(26px);
+                }
+                
+                .slider.round {
+                    border-radius: 24px;
+                }
+                
+                .slider.round:before {
+                    border-radius: 50%;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>

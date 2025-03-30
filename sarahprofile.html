@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarah Kamau - Luxury Apartments Specialist | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .agent-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .agent-header-info {
+            flex: 1;
+        }
+
+        .agent-name {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .agent-specialty {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .agent-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .agent-location i {
+            color: var(--accent);
+        }
+
+        .agent-badges {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .agent-stats {
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+        }
+
+        .agent-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .agent-bio p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .agent-services {
+            margin: 40px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .service-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .agent-listings {
+            margin: 40px 0;
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .listing-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .listing-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .listing-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .listing-card:hover .listing-image img {
+            transform: scale(1.05);
+        }
+
+        .listing-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .listing-info {
+            padding: 20px;
+        }
+
+        .listing-info h3 {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .listing-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #777;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .listing-location i {
+            color: var(--primary);
+        }
+
+        .listing-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .listing-price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: #777;
+        }
+
+        .listing-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .listing-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .listing-btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .listing-btn-primary:hover {
+            background-color: #238f81;
+        }
+
+        .listing-btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .listing-btn-outline:hover {
+            background-color: rgba(42, 157, 143, 0.1);
+        }
+
+        .testimonials-section {
+            margin: 40px 0;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent);
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .agent-sidebar {
+            position: sticky;
+            top: 100px;
+            align-self: start;
+        }
+
+        .contact-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contact-info {
+            margin-bottom: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .contact-form input, 
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .certifications-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .certifications-card h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .certification-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .certification-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .certification-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .certification-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .certification-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .agent-sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .agent-badges, .agent-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 80px 0 40px;
+            }
+            
+            .agent-name {
+                font-size: 1.8rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .agent-sidebar {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 60px 0 30px;
+            }
+            
+            .agent-name {
+                font-size: 1.5rem;
+            }
+            
+            .agent-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Kamau" class="agent-photo">
+            <div class="agent-header-info">
+                <h1 class="agent-name">Sarah Kamau</h1>
+                <div class="agent-specialty">Luxury Apartments Specialist</div>
+                <div class="agent-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Westlands, Nairobi, Kenya</span>
+                </div>
+                <div class="agent-badges">
+                    <span class="badge">Top Performer</span>
+                    <span class="badge">Verified</span>
+                    <span class="badge">5+ Years Experience</span>
+                </div>
+                <div class="agent-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">127</div>
+                        <div class="stat-label">Properties</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.9</div>
+                        <div class="stat-label">Rating (58)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="properties.html" class="nav-link">Properties</a>
+                <a href="agents.html" class="nav-link">Agents</a>
+                <a href="blog.html" class="nav-link">Blog</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <main class="agent-content">
+            <section class="agent-bio">
+                <h2 class="section-title">About Me</h2>
+                <p>With over 5 years of experience in Nairobi's luxury real estate market, I specialize in helping clients find their dream apartments in Westlands and surrounding areas. My deep understanding of the local market dynamics ensures my clients get the best value for their investment.</p>
+                <p>I take pride in building long-term relationships with my clients, many of whom have become repeat customers and friends. My approach combines market expertise, attention to detail, and personalized service to make the rental process seamless and stress-free.</p>
+                <p>When I'm not helping clients find their perfect home, you can find me exploring Nairobi's vibrant restaurant scene or volunteering with local community housing initiatives.</p>
+            </section>
+
+            <section class="agent-services">
+                <h2 class="section-title">My Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-home"></i>
+                        <h4>Property Search</h4>
+                        <p>Tailored property recommendations based on your specific needs, preferences, and budget.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Negotiation</h4>
+                        <p>Expert negotiation to secure the best possible terms and pricing for your rental.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-file-contract"></i>
+                        <h4>Lease Review</h4>
+                        <p>Thorough lease agreement review to protect your interests and clarify all terms.</p>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-undo"></i>
+                        <h4>Relocation Assistance</h4>
+                        <p>Comprehensive support for clients moving to Nairobi, including area orientation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="agent-listings">
+                <h2 class="section-title">My Listings</h2>
+                <div class="listings-grid">
+                    <div class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Luxury Apartment">
+                            <span class="listing-badge">Featured</span>
+                        </div>
+                        <div class="listing-info">
+                            <h3>Modern 2-Bedroom Apartment</h3>
+                            <div class="listing-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Westlands, Nairobi</span>
+                            </div>
+                            <div class="listing-price">KES 85,000 <span>/month</span></div>
+                            <div class="listing-actions">
+                                <a href="property-details.html" class="listing-btn listing-btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Studio Apartment">
+                            <span class="listing-badge">New</span>
+                        </div>
+                        <div class="listing-info">
+                            <h3>Luxury Studio Apartment</h3>
+                            <div class="listing-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Parklands, Nairobi</span>
+                            </div>
+                            <div class="listing-price">KES 45,000 <span>/month</span></div>
+                            <div class="listing-actions">
+                                <a href="property-details.html" class="listing-btn listing-btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="listing-card">
+                        <div class="listing-image">
+                            <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Penthouse">
+                            <span class="listing-badge">Premium</span>
+                        </div>
+                        <div class="listing-info">
+                            <h3>Executive Penthouse</h3>
+                            <div class="listing-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Kilimani, Nairobi</span>
+                            </div>
+                            <div class="listing-price">KES 220,000 <span>/month</span></div>
+                            <div class="listing-actions">
+                                <a href="property-details.html" class="listing-btn listing-btn-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="properties.html?agent=SarahKamau" class="listing-btn listing-btn-outline">View All My Listings</a>
+                </div>
+            </section>
+
+            <section class="testimonials-section">
+                <h2 class="section-title">Client Testimonials</h2>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        Sarah was incredibly professional and patient throughout our apartment search. She understood exactly what we were looking for and found us a perfect 2-bedroom in Westlands that wasn't even listed yet. Her negotiation skills saved us 15% on the asking rent!
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Mary Wanjiru">
+                        <div class="author-info">
+                            <h4>Mary Wanjiru</h4>
+                            <p>Tenant since 2021</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        As a property owner, I've worked with many agents over the years. Sarah stands out for her professionalism, marketing skills, and ability to find quality tenants quickly. She manages my three properties and I never have to worry about vacancies or late payments.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="David Omondi">
+                        <div class="author-info">
+                            <h4>David Omondi</h4>
+                            <p>Property Owner</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="agent-sidebar">
+            <div class="contact-card">
+                <h3>Contact Sarah</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 700 123456</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>sarah@crenrentals.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Mon-Fri: 9am-6pm<br>Sat: 10am-4pm</span>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="How can I help you?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+
+            <div class="certifications-card">
+                <h3>Certifications</h3>
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="certification-info">
+                        <h4>Certified Rental Agent</h4>
+                        <p>Kenya Institute of Real Estate, 2020</p>
+                    </div>
+                </div>
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="certification-info">
+                        <h4>Negotiation Specialist</h4>
+                        <p>Real Estate Professionals Association, 2019</p>
+                    </div>
+                </div>
+                <div class="certification-item">
+                    <div class="certification-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <div class="certification-info">
+                        <h4>Property Management</h4>
+                        <p>Nairobi School of Real Estate, 2018</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Your trusted partner in finding the perfect rental home. We connect tenants with quality properties across Kenya.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="properties.html">Properties</a></li>
+                    <li><a href="agents.html">Agents</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Plaza, Westlands Road, Nairobi, Kenya</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 700 000000</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@crenrentals.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 cREN Rentals. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        const contactForm = document.querySelector('.contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! Sarah will contact you shortly.');
+            contactForm.reset();
+        });
+
+        // Listing card hover effect
+        const listingCards = document.querySelectorAll('.listing-card');
+        listingCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const image = card.querySelector('.listing-image img');
+                image.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const image = card.querySelector('.listing-image img');
+                image.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
