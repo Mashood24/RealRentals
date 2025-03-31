@@ -826,6 +826,13 @@
                 this.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
             });
         });
+
+        // Logout functionality 
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
     </script>
 </body>
 </html>

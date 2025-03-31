@@ -1154,6 +1154,13 @@
         const mm = String(today.getMonth() + 1).padStart(2, '0');
         const yyyy = today.getFullYear();
         document.getElementById('move-date').min = `${yyyy}-${mm}-${dd}`;
+
+        // Logout functionality 
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
     </script>
 </body>
 </html>

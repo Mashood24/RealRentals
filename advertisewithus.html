@@ -531,7 +531,7 @@
                 <a href="blog.html" class="nav-link">Blog</a>
                 <a href="aboutUs.html" class="nav-link">About Us</a>
                 <a href="https://wa.me/+254796538128" class="nav-link">Contact</a>
-                <a href="renting.html" class="nav-link">Logout</a>
+                <a href="#" class="nav-link" onclick="logout()">Logout</a>
             </div>
         </div>
     </nav>
@@ -770,6 +770,13 @@
                 });
             });
         });
+
+        // Logout functionality 
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
     </script>
 </body>
 </html>

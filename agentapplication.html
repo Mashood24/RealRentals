@@ -565,11 +565,11 @@
             <a href="index.html" class="logo">c<span>REN</span></a>
             <div class="nav-links">
                 <a href="index.html" class="nav-link">Home</a>
-                <a href="properties.html" class="nav-link">Properties</a>
+                <a href="property.html" class="nav-link">Properties</a>
                 <a href="agents.html" class="nav-link">Agents</a>
                 <a href="blog.html" class="nav-link">Blog</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-                <a href="login.html" class="nav-link">Login</a>
+                <a href="https://wa.me/+254796538128" class="nav-link">Contact</a>
+                <a href="#" class="nav-link" onclick="logout()">Logout</a>
             </div>
         </div>
     </nav>
@@ -766,20 +766,20 @@
                 <div class="footer-logo">c<span>REN</span></div>
                 <p>Your trusted partner in finding the perfect rental home. We connect tenants with quality properties across Kenya.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://web.facebook.com/abiola.mashood.5245" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/abiolamashood10" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/mashrichvik/?next=%2F" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="footer-links">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="index.html">Home</a></li>
-                    <li><a href="properties.html">Properties</a></li>
+                    <li><a href="propertylisting.html">Properties</a></li>
                     <li><a href="agents.html">Agents</a></li>
                     <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="https://wa.me/+254796538128">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-contact">
@@ -849,6 +849,13 @@
                 label.appendChild(span);
             }
         });
+
+        // Logout functionality 
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
     </script>
 </body>
 </html>

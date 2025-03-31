@@ -240,6 +240,37 @@
             font-weight: 600;
         }
 
+        /* Register and Forgot Password Pages */
+        .auth-page {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 78, 137, 0.8), rgba(0, 78, 137, 0.9)), url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+        }
+
+        .auth-form-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .back-to-login {
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-to-login i {
+            margin-right: 8px;
+        }
+
         /* Main Content (Hidden Initially) */
         .main-content {
             display: none;
@@ -804,7 +835,7 @@
                         <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
                         <span class="toggle-password" id="togglePassword"><i class="far fa-eye"></i></span>
                     </div>
-                    <a href="#" class="forgot-password" id="forgotPassword">Forgot password?</a>
+                    <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot password?</a>
                 </div>
                 
                 <button type="submit" class="btn btn-primary" id="loginBtn">Sign In</button>
@@ -813,7 +844,7 @@
                     <p>Or sign in with</p>
                     <div class="social-icons">
                         <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?as=tKbccoOazLzNJfY2Zd%2BODJVkbcKL%2BLUptXLYMCNqxQk&client_id=925713789131-dt7o00ph4snl83ecm15iph1el39vlur8.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=id_token&gsiwebsdk=gis_attributes&redirect_uri=https%3A%2F%2Fwww.bitget.com&response_mode=form_post&origin=https%3A%2F%2Fwww.bitget.com&display=popup&prompt=select_account&gis_params=ChZodHRwczovL3d3dy5iaXRnZXQuY29tEhZodHRwczovL3d3dy5iaXRnZXQuY29tGAcqK3RLYmNjb09hekx6TkpmWTJaZCtPREpWa2JjS0wrTFVwdFhMWU1DTnF4UWsySDkyNTcxMzc4OTEzMS1kdDdvMDBwaDRzbmw4M2VjbTE1aXBoMWVsMzl2bHVyOC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbTgBQkBkNjcxZjAzMjZkODkyZDE0NTUxN2I3ZDdjNmU0ZTBkNDY5MmYzOTA2YjEwNzEyZjFkMmVlY2Q4ODc3NjZmMDI4&service=lso&o2v=1&ddm=1&flowName=GeneralOAuthFlow" class="social-icon google"><i class="fab fa-google"></i></a>
+                        <a href="#" class="social-icon google"><i class="fab fa-google"></i></a>
                         <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
@@ -821,6 +852,62 @@
                 <p class="register-link">Don't have an account? <a href="#" id="registerLink">Register here</a></p>
             </form>
         </div>
+    </section>
+
+    <!-- Register Page -->
+    <section class="auth-page" id="registerPage">
+        <div class="auth-form-container">
+            <form id="registerForm">
+                <h2>Create Account</h2>
+                
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regEmail">Email Address</label>
+                    <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="regPassword" class="form-control" placeholder="Create a password (min 6 chars)" required minlength="6">
+                        <span class="toggle-password" id="toggleRegPassword"><i class="far fa-eye"></i></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="regConfirmPassword" class="form-control" placeholder="Confirm your password" required>
+                        <span class="toggle-password" id="toggleRegConfirmPassword"><i class="far fa-eye"></i></span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="registerBtn">Register</button>
+            </form>
+        </div>
+        <a href="#" class="back-to-login" id="backToLoginFromRegister"><i class="fas fa-arrow-left"></i> Back to login</a>
+    </section>
+
+    <!-- Forgot Password Page -->
+    <section class="auth-page" id="forgotPasswordPage">
+        <div class="auth-form-container">
+            <form id="forgotPasswordForm">
+                <h2>Reset Password</h2>
+                <p>Enter your email address and we'll send you a link to reset your password.</p>
+                
+                <div class="form-group">
+                    <label for="forgotEmail">Email Address</label>
+                    <input type="email" id="forgotEmail" class="form-control" placeholder="Enter your email" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="resetPasswordBtn">Send Reset Link</button>
+            </form>
+        </div>
+        <a href="#" class="back-to-login" id="backToLoginFromForgot"><i class="fas fa-arrow-left"></i> Back to login</a>
     </section>
 
     <!-- Main Content (Hidden Initially) -->
@@ -874,6 +961,9 @@
                     <li class="nav-item">
                         <a href="profile.html" class="nav-link">Profile</a>
                 </ul>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="logout()">Logout</a>
+                </li>
             </div>
         </nav>
 
@@ -1081,27 +1171,52 @@
     <script>
         // DOM Elements
         const loginSection = document.getElementById('loginSection');
+        const registerPage = document.getElementById('registerPage');
+        const forgotPasswordPage = document.getElementById('forgotPasswordPage');
         const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
         const mainContent = document.getElementById('mainContent');
+        
+        // Check login state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+        if (isLoggedIn) {
+            loginSection.style.display = 'none';
+            registerPage.style.display = 'none';
+            forgotPasswordPage.style.display = 'none';
+            mainContent.style.display = 'block';
+            startAnimations();
+           } else {
+               loginSection.style.display = 'flex';
+               mainContent.style.display = 'none';
+            }
+        });
+
+        // Toggle Password Elements
         const togglePassword = document.getElementById('togglePassword');
         const passwordInput = document.getElementById('password');
-        const forgotPasswordLink = document.getElementById('forgotPassword');
-        const registerLink = document.getElementById('registerLink');
-        const loginBtn = document.getElementById('loginBtn');
+        const toggleRegPassword = document.getElementById('toggleRegPassword');
+        const regPasswordInput = document.getElementById('regPassword');
+        const toggleRegConfirmPassword = document.getElementById('toggleRegConfirmPassword');
+        const regConfirmPasswordInput = document.getElementById('regConfirmPassword');
         
-        // Carousel Elements
-        const slides = document.getElementById('slides');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const indicators = document.getElementById('indicators').children;
-        let currentSlide = 0;
-        const totalSlides = document.querySelectorAll('.slides img').length;
+        // Link Elements
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const registerLink = document.getElementById('registerLink');
+        const backToLoginFromRegister = document.getElementById('backToLoginFromRegister');
+        const backToLoginFromForgot = document.getElementById('backToLoginFromForgot');
+        
+        // Button Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const resetPasswordBtn = document.getElementById('resetPasswordBtn');
 
-        // Mock user data (in a real app, this would come from a database)
+        // Mock user data
         const users = [
-            { email: 'user@example.com', password: 'password123' },
-            { email: 'admin@cren.com', password: 'admin123' },
-            { email: 'abiola@d.com', password: '123'}
+            { email: 'user@example.com', password: 'password123', name: 'Test User' },
+            { email: 'admin@cren.com', password: 'admin123', name: 'Admin User' }
         ];
 
         // Toggle Password Visibility
@@ -1111,6 +1226,43 @@
             this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
         });
 
+        toggleRegPassword.addEventListener('click', function() {
+            const type = regPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            regPasswordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+
+        toggleRegConfirmPassword.addEventListener('click', function() {
+            const type = regConfirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            regConfirmPasswordInput.setAttribute('type', type);
+            this.innerHTML = type === 'password' ? '<i class="far fa-eye"></i>' : '<i class="far fa-eye-slash"></i>';
+        });
+
+        // Switch between auth pages
+        registerLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginSection.style.display = 'none';
+            registerPage.style.display = 'flex';
+        });
+
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginSection.style.display = 'none';
+            forgotPasswordPage.style.display = 'flex';
+        });
+
+        backToLoginFromRegister.addEventListener('click', function(e) {
+            e.preventDefault();
+            registerPage.style.display = 'none';
+            loginSection.style.display = 'flex';
+        });
+
+        backToLoginFromForgot.addEventListener('click', function(e) {
+            e.preventDefault();
+            forgotPasswordPage.style.display = 'none';
+            loginSection.style.display = 'flex';
+        });
+
         // Login Form Submission
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1118,58 +1270,103 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Simple validation
             if (!email || !password) {
                 alert('Please fill in all fields');
                 return;
             }
             
-            // Check if user exists (in a real app, this would be an API call)
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
-                // Successful login
+                // Store login state
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', email);
+
                 loginSection.style.display = 'none';
                 mainContent.style.display = 'block';
-                
-                // Start animations
                 startAnimations();
             } else {
                 alert('Invalid email or password. Please try again.');
             }
         });
 
-        // Forgot Password
-        forgotPasswordLink.addEventListener('click', function(e) {
+         // Logout functionality 
+         function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+
+        // Register Form Submission
+        registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = prompt('Please enter your email address to reset your password:');
             
-            if (email) {
-                // In a real app, you would send a password reset email
-                alert(`Password reset instructions have been sent to ${email} (simulated)`);
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields');
+                return;
             }
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters');
+                return;
+            }
+            
+            const userExists = users.some(u => u.email === email);
+            
+            if (userExists) {
+                alert('This email is already registered. Please login instead.');
+                return;
+            }
+            
+            users.push({ email, password, name });
+            alert('Registration successful! You can now login with your credentials.');
+            registerPage.style.display = 'none';
+            loginSection.style.display = 'flex';
         });
 
-        // Register Link
-        registerLink.addEventListener('click', function(e) {
+        // Forgot Password Form Submission
+        forgotPasswordForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = prompt('Enter your email address:');
-            const password = prompt('Create a password (at least 6 characters):');
             
-            if (email && password && password.length >= 6) {
-                // In a real app, you would add this to your database
-                users.push({ email, password });
-                alert('Registration successful! You can now login with your credentials.');
+            const email = document.getElementById('forgotEmail').value;
+            
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            const userExists = users.some(u => u.email === email);
+            
+            if (userExists) {
+                alert('Password reset instructions have been sent to your email (simulated)');
+                forgotPasswordPage.style.display = 'none';
+                loginSection.style.display = 'flex';
             } else {
-                alert('Registration failed. Please provide valid email and password (min 6 characters).');
+                alert('No account found with that email address');
             }
         });
 
         // Carousel Functionality
+        const slides = document.getElementById('slides');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicators = document.getElementById('indicators').children;
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.slides img').length;
+
         function updateCarousel() {
             slides.style.transform = `translateX(-${currentSlide * 100}%)`;
             
-            // Update indicators
             for (let i = 0; i < indicators.length; i++) {
                 indicators[i].classList.toggle('active', i === currentSlide);
             }
@@ -1185,7 +1382,6 @@
             updateCarousel();
         });
 
-        // Set up indicator clicks
         for (let i = 0; i < indicators.length; i++) {
             indicators[i].addEventListener('click', function() {
                 currentSlide = i;
@@ -1193,7 +1389,6 @@
             });
         }
 
-        // Auto-advance carousel
         setInterval(function() {
             currentSlide = (currentSlide + 1) % totalSlides;
             updateCarousel();
@@ -1214,10 +1409,7 @@
                 });
             }
             
-            // Initial check
             checkScroll();
-            
-            // Check on scroll
             window.addEventListener('scroll', checkScroll);
         }
 
@@ -1227,7 +1419,26 @@
             document.getElementById('password').value = 'admin123';
             loginBtn.click();
         }
+
+        link.addEventListener('click', function(e) {
+                // Allow normal navigation for external links
+                if (this.href.includes(window.location.hostname)) {
+                    e.preventDefault();
+                    // Store current state before navigating
+                    localStorage.setItem('lastVisitedPage', this.href);
+                    window.location.href = this.href;
+                }
+            });
+    
+        // On any page load, check if user is logged in
+        window.addEventListener('load', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (!isLoggedIn && !window.location.href.includes('login')) {
+                window.location.href = 'index.html'; // Redirect to login if not authenticated
+            }
+        });
+
+        
     </script>
 </body>
-
 </html>

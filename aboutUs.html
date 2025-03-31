@@ -537,7 +537,8 @@
                 <a href="propertylisting.html" class="nav-link">Properties</a>
                 <a href="aboutUs.html" class="nav-link">About Us</a>
                 <a href="https://wa.me/+25496538128" class="nav-link">Contact</a>
-                <a href="renting.html" class="nav-link">Logout</a>
+                <a href="#" class="nav-link" onclick="logout()">Logout</a>
+               
             </div>
         </div>
     </nav>
@@ -691,4 +692,12 @@
         </div>
     </footer>
 </body>
+<script>
+    // Logout functionality 
+    function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
+</script>
 </html>

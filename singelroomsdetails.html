@@ -1118,6 +1118,13 @@
             alert('Thank you for your inquiry! Our agent will contact you shortly.');
             this.reset();
         });
+
+        // Logout functionality 
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
     </script>
 </body>
 </html>

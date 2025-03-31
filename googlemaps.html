@@ -318,6 +318,14 @@
 
     <!-- Google Maps API -->
     <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (!isLoggedIn) {
+            window.location.href = 'index.html'; // Redirect to login
+    }
+   
+});
         // Initialize and display maps when the window loads
         function initMaps() {
             // Nairobi Property
@@ -414,11 +422,17 @@
                 }
             });
         });
+
+        // Logout functionality 
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html'; // Redirect to login page
+        }
     </script>
 
     <!-- Load Google Maps API with your API key -->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCE2VinQcU2nkaTr0HwjseuQNAmV6gxZg&callback=initMaps&libraries=places">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCE2VinQcU2nkaTr0HwjseuQNAmV6gxZg&callback=initMaps&libraries=places">
     </script>
 </body>
 </html>
