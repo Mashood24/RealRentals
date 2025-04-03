@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Properties | cREN Rentals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles from previous design */
+        :root {
+            --primary: #2a9d8f;
+            --secondary: #264653;
+            --accent: #e9c46a;
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+            --industrial: #8d99ae; /* New industrial accent color */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(to right, var(--secondary), var(--industrial));
+            color: white;
+            padding: 60px 0 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .breadcrumb i {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navigation - same as before */
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Industrial-specific styles */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .property-filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .filter-group {
+            margin-bottom: 15px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .filter-group select, 
+        .filter-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .filter-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #238f81;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(42, 157, 143, 0.1);
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .property-image {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .property-card:hover .property-image img {
+            transform: scale(1.05);
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--industrial);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .property-content {
+            padding: 20px;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .property-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .property-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .feature i {
+            color: var(--industrial);
+        }
+
+        .property-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .property-price span {
+            font-size: 14px;
+            font-weight: normal;
+            color: #666;
+        }
+
+        .property-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 14px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+
+        .page-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: white;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover, 
+        .page-link.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Footer - same as before */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-logo span {
+            color: var(--accent);
+        }
+
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h3, .footer-contact h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 14px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .properties-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 0 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header {
+                padding: 30px 0 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .filter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .properties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .property-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Industrial Properties</span>
+            </div>
+            <h1>Industrial Spaces for Rent</h1>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">c<span>REN</span></a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="properties.html" class="nav-link">Residential</a>
+                <a href="industrial.html" class="nav-link active">Industrial</a>
+                <a href="commercial.html" class="nav-link">Commercial</a>
+                <a href="agents.html" class="nav-link">Agents</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="property-filters">
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label for="property-type">Property Type</label>
+                    <select id="property-type">
+                        <option value="">All Types</option>
+                        <option value="warehouse">Warehouse</option>
+                        <option value="factory">Factory</option>
+                        <option value="industrial-land">Industrial Land</option>
+                        <option value="showroom">Showroom</option>
+                        <option value="cold-storage">Cold Storage</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="location">Location</label>
+                    <select id="location">
+                        <option value="">All Locations</option>
+                        <option value="nairobi">Nairobi</option>
+                        <option value="mombasa">Mombasa</option>
+                        <option value="kisumu">Kisumu</option>
+                        <option value="nakuru">Nakuru</option>
+                        <option value="thika">Thika</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="min-size">Min Size (sqm)</label>
+                    <input type="number" id="min-size" placeholder="100">
+                </div>
+                <div class="filter-group">
+                    <label for="max-price">Max Price (KES)</label>
+                    <input type="number" id="max-price" placeholder="500,000">
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button class="btn btn-outline">Reset</button>
+                <button class="btn btn-primary">Apply Filters</button>
+            </div>
+        </div>
+
+        <div class="properties-grid">
+            <!-- Property 1 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1605152276897-4f618f831968?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Industrial Warehouse">
+                    <div class="property-badge">Warehouse</div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">Modern Warehouse - Embakasi</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Embakasi, Nairobi</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>1,200 sqm</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-warehouse"></i>
+                            <span>12m Clearance</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-truck-loading"></i>
+                            <span>Loading Dock</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-parking"></i>
+                            <span>10 Parking</span>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 350,000 <span>/ month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="#" class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> Save
+                        </a>
+                        <a href="industrial-details.html" class="btn btn-primary btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 2 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Industrial Land">
+                    <div class="property-badge">Industrial Land</div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">Prime Industrial Land - Athi River</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Athi River, Machakos</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>5 Acres</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-road"></i>
+                            <span>Road Access</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-tint"></i>
+                            <span>Water Available</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>Electricity</span>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 12,500,000 <span>/ outright</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="#" class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> Save
+                        </a>
+                        <a href="industrial-details.html" class="btn btn-primary btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 3 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Factory Space">
+                    <div class="property-badge">Factory</div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">Manufacturing Space - Ruiru</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Ruiru, Kiambu</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>800 sqm</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-industry"></i>
+                            <span>3-Phase Power</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-water"></i>
+                            <span>Drainage</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-users"></i>
+                            <span>Staff Facilities</span>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 220,000 <span>/ month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="#" class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> Save
+                        </a>
+                        <a href="industrial-details.html" class="btn btn-primary btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 4 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Cold Storage">
+                    <div class="property-badge">Cold Storage</div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">Refrigerated Warehouse - Eastleigh</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Eastleigh, Nairobi</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>600 sqm</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-snowflake"></i>
+                            <span>Temperature Control</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-boxes"></i>
+                            <span>Racking System</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>24/7 Security</span>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 420,000 <span>/ month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="#" class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> Save
+                        </a>
+                        <a href="industrial-details.html" class="btn btn-primary btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 5 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1600566752225-2202139c8b2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Showroom">
+                    <div class="property-badge">Showroom</div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">Retail Showroom - Westlands</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Westlands, Nairobi</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>300 sqm</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-store"></i>
+                            <span>Street Frontage</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-glass-martini-alt"></i>
+                            <span>Mezzanine Floor</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-parking"></i>
+                            <span>Customer Parking</span>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 180,000 <span>/ month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="#" class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> Save
+                        </a>
+                        <a href="industrial-details.html" class="btn btn-primary btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property 6 -->
+            <div class="property-card">
+                <div class="property-image">
+                    <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Light Industrial">
+                    <div class="property-badge">Light Industrial</div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">Light Industrial Units - Kitengela</h3>
+                    <div class="property-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Kitengela, Kajiado</span>
+                    </div>
+                    <div class="property-features">
+                        <div class="feature">
+                            <i class="fas fa-ruler-combined"></i>
+                            <span>400 sqm</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-building"></i>
+                            <span>5 Units Available</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-truck"></i>
+                            <span>Good Access</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Managed Estate</span>
+                        </div>
+                    </div>
+                    <div class="property-price">
+                        KES 95,000 <span>/ month</span>
+                    </div>
+                    <div class="property-actions">
+                        <a href="#" class="btn btn-outline btn-sm">
+                            <i class="far fa-heart"></i> Save
+                        </a>
+                        <a href="industrial-details.html" class="btn btn-primary btn-sm">
+                            View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="#" class="page-link"><i class="fas fa-chevron-left"></i></a>
+            <a href="#" class="page-link active">1</a>
+            <a href="#" class="page-link">2</a>
+            <a href="#" class="page-link">3</a>
+            <a href="#" class="page-link">4</a>
+            <a href="#" class="page-link"><i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">c<span>REN</span></div>
+                <p>Specializing in industrial and commercial real estate solutions across Kenya. We connect businesses with the perfect spaces for growth.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Industrial Properties</h3>
+                <ul>
+                    <li><a href="#">Warehouses</a></li>
+                    <li><a href="#">Factories</a></li>
+                    <li><a href="#">Industrial Land</a></li>
+                    <li><a href="#">Cold Storage</a></li>
+                    <li><a href="#">Showrooms</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>cREN Industrial Plaza, Mombasa Road, Nairobi</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+254 700 123456</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>industrial@crenrentals.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 cREN Industrial Properties. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple filter functionality for demonstration
+        document.querySelector('.filter-actions .btn-primary').addEventListener('click', function() {
+            alert('Filters applied! In a real implementation, this would filter the property listings.');
+        });
+
+        // Property card hover effects are handled by CSS
+        // In a real implementation, you would have:
+        // 1. Actual filtering logic
+        // 2. Pagination controls
+        // 3. Favorite property functionality
+        // 4. Dynamic loading of properties from a database
+
+        // Example of favorite button functionality
+        const favoriteButtons = document.querySelectorAll('.btn-outline .fa-heart');
+        favoriteButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.toggle('fas');
+                this.classList.toggle('far');
+                this.style.color = this.classList.contains('fas') ? 'red' : '';
+            });
+        });
+    </script>
+</body>
+</html>

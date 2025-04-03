@@ -598,16 +598,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script>
         // Replace the form submission in your existing JavaScript with:
-document.getElementById('paymentForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
     
     // Reset error messages
-    document.querySelectorAll('.error-message').forEach(el => {
-        el.style.display = 'none';
-    });
+        document.querySelectorAll('.error-message').forEach(el => {
+            el.style.display = 'none';
+        });
 
     // Get selected payment method
-    const selectedMethod = document.querySelector('.payment-option.selected').id;
+        const selectedMethod = document.querySelector('.payment-option.selected').id;
     
     if (selectedMethod === 'mpesaOption') {
         const phone = document.getElementById('mpesaNumber').value;
@@ -652,7 +652,6 @@ document.getElementById('paymentForm').addEventListener('submit', async function
         // ... existing code ...
     }
 });
-
         // mpesa payment
         document.getElementById('mpesaForm').addEventListener('submit', async (e) => {
             e.preventDefault();
