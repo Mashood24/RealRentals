@@ -308,7 +308,7 @@
             </div>
             
             <button type="submit" class="btn btn-primary" id="pay-button">
-                <i class="fas fa-lock"></i> Pay $1,200.00
+                <i class="fas fa-lock"></i> Pay ksh25,000.00
             </button>
             
             <div class="security-note">
@@ -387,7 +387,96 @@
             e.target.value = e.target.value.replace(/\D/g, '');
         });
 
-        
+        paymentForm.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  // Show processing state
+  payButton.disabled = true;
+  payButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Payment';
+  payButton.classList.add('processing');
+  
+  try {
+    // Collect form data
+    const formData = {
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      cardNumber: document.getElementById('card-number').value.replace(/\s/g, ''),
+      expiryMonth: document.getElementById('expiry-date-month').value,
+      expiryYear: document.getElementById('expiry-date-year').value,
+      cvv: document.getElementById('cvv').value,
+      amount: 1200, // Your amount in dollars
+      propertyId: 'property-123' // Get from your system
+    };
+
+    // Create payment intent
+    const response = await fetch('http://localhost:5000/api/payment/create-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    // Check if response is OK
+    if (!response.ok) {
+      const errorData = await response.text();
+      throw new Error(errorData || 'Payment failed');
+    }
+
+    // Parse JSON only if response exists
+    const data = await response.json();
+    
+    if (!data.clientSecret) {
+      throw new Error('Invalid response from server');
+    }
+
+    // Confirm payment with Stripe
+    const stripe = Stripe('your_stripe_publishable_key');
+    const { error, paymentIntent } = await stripe.confirmCardPayment(data.clientSecret, {
+      payment_method: {
+        card: elements.getElement('card'),
+        billing_details: {
+          name: formData.name,
+          email: formData.email,
+        },
+      },
+    });
+    
+    if (error) {
+      throw error;
+    }
+    
+    // Confirm payment with backend
+    const confirmResponse = await fetch('http://localhost:5000/api/payment/confirm-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        bookingId: data.bookingId,
+        paymentMethod: 'card',
+        transactionId: paymentIntent.id,
+      }),
+    });
+
+    if (!confirmResponse.ok) {
+      throw new Error('Payment confirmation failed');
+    }
+
+    payButton.innerHTML = '<i class="fas fa-check"></i> Payment Successful';
+    
+    // Redirect to confirmation page
+    setTimeout(function() {
+      window.location.href = 'successfulbooking.html';
+    }, 2000);
+  } catch (err) {
+    console.error('Payment error:', err);
+    payButton.innerHTML = '<i class="fas fa-times"></i> Payment Failed';
+    payButton.classList.remove('processing');
+    alert('Payment failed: ' + (err.message || 'Unknown error'));
+    payButton.disabled = false;
+  }
+});
     </script>
 </body>
 </html>
