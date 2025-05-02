@@ -821,18 +821,18 @@
     <!-- Login Section (Initial View) -->
     <section class="login-section" id="loginSection">
         <div class="container">
-            <form class="login-form" id="loginForm">
+            <form class="login-form" id="loginForm" action="connect.php" method="post">
                 <h2>Welcome Back</h2>
-                
+              
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required name="email">
                 </div>
                 
                 <div class="form-group">
                     <label for="password">Password</label>
                     <div class="password-wrapper">
-                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                        <input type="password" id="password" class="form-control" placeholder="Enter your password" required name="password">
                         <span class="toggle-password" id="togglePassword"><i class="far fa-eye"></i></span>
                     </div>
                     <a href="#" class="forgot-password" id="forgotPasswordLink">Forgot password?</a>
@@ -843,9 +843,9 @@
                 <div class="social-login">
                     <p>Or sign in with</p>
                     <div class="social-icons">
-                        <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon google"><i class="fab fa-google"></i></a>
-                        <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://web.facebook.com/?_rdc=1&_rdr#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://myaccount.google.com/?pli=1" class="social-icon google"><i class="fab fa-google"></i></a>
+                        <a href="https://x.com/login?lang=en-gb" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 
@@ -855,42 +855,42 @@
     </section>
 
     <!-- Register Page -->
-    <section class="auth-page" id="registerPage">
-        <div class="auth-form-container">
-            <form id="registerForm">
-                <h2>Create Account</h2>
-                
-                <div class="form-group">
-                    <label for="regName">Full Name</label>
-                    <input type="text" id="regName" class="form-control" placeholder="Enter your full name" required>
+<section class="auth-page" id="registerPage">
+    <div class="auth-form-container">
+        <form id="registerForm" action="db.php" method="post" autocomplete="on">
+            <h2>Create Account</h2>
+
+            <div class="form-group">
+                <label for="regName">Full Name</label>
+                <input type="text" id="regName" class="form-control" placeholder="Enter your full name" name="fullname" required autocomplete="name">
+            </div>
+            
+            <div class="form-group">
+                <label for="regEmail">Email Address</label>
+                <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" name="email" required autocomplete="email">
+            </div>
+            
+            <div class="form-group">
+                <label for="regPassword">Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="regPassword" class="form-control" placeholder="Create a password (min 6 chars)" name="password" required minlength="6" autocomplete="new-password">
+                    <span class="toggle-password" id="toggleRegPassword"><i class="far fa-eye"></i></span>
                 </div>
-                
-                <div class="form-group">
-                    <label for="regEmail">Email Address</label>
-                    <input type="email" id="regEmail" class="form-control" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="regConfirmPassword">Confirm Password</label>
+                <div class="password-wrapper">
+                    <input type="password" id="regConfirmPassword" class="form-control" placeholder="Confirm your password" name="confirmpassword" required autocomplete="new-password">
+                    <span class="toggle-password" id="toggleRegConfirmPassword"><i class="far fa-eye"></i></span>
                 </div>
-                
-                <div class="form-group">
-                    <label for="regPassword">Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="regPassword" class="form-control" placeholder="Create a password (min 6 chars)" required minlength="6">
-                        <span class="toggle-password" id="toggleRegPassword"><i class="far fa-eye"></i></span>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="regConfirmPassword">Confirm Password</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="regConfirmPassword" class="form-control" placeholder="Confirm your password" required>
-                        <span class="toggle-password" id="toggleRegConfirmPassword"><i class="far fa-eye"></i></span>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-primary" id="registerBtn">Register</button>
-            </form>
-        </div>
-        <a href="#" class="back-to-login" id="backToLoginFromRegister"><i class="fas fa-arrow-left"></i> Back to login</a>
-    </section>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" id="registerBtn">Register</button>
+        </form>
+    </div>
+    <a href="#" class="back-to-login" id="backToLoginFromRegister"><i class="fas fa-arrow-left"></i> Back to login</a>
+</section>
 
     <!-- Forgot Password Page -->
     <section class="auth-page" id="forgotPasswordPage">
@@ -918,7 +918,7 @@
                 <a href="renting.html" class="logo">c<span>REN</span></a>
                 <ul class="nav-links">
                     <li class="nav-item">
-                        <a href="propertylisting.html" class="nav-link">Find Place</a>
+                        <a href="" class="nav-link">Find Place</a>
                         <ul class="dropdown-menu">
                             <li><a href="propertylisting.html" class="dropdown-item">Apartments</a></li>
                             <li><a href="propertylisting.html" class="dropdown-item">Houses</a></li>
@@ -927,7 +927,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="propertylisting.html" class="nav-link">Long Term</a>
+                        <a href="" class="nav-link">Long Term</a>
                         <ul class="dropdown-menu">
                             <li><a href="propertylisting.html" class="dropdown-item">1 Year Lease</a></li>
                             <li><a href="propertylisting.html" class="dropdown-item">2 Year Lease</a></li>
@@ -935,7 +935,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="propertylisting.html" class="nav-link">Short Term</a>
+                        <a href="" class="nav-link">Short Term</a>
                         <ul class="dropdown-menu">
                             <li><a href="propertylisting.html" class="dropdown-item">Weekly Rentals</a></li>
                             <li><a href="propertylisting.html" class="dropdown-item">Monthly Rentals</a></li>
@@ -943,7 +943,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="propertylisting.html" class="nav-link">Rooms</a>
+                        <a href="" class="nav-link">Rooms</a>
                         <ul class="dropdown-menu">
                             <li><a href="singlerooms.html" class="dropdown-item">Single Room</a></li>
                             <li><a href="sharedrooms.html" class="dropdown-item">Shared Room</a></li>
@@ -951,9 +951,9 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="propertylisting.html" class="nav-link">Payments</a>
+                        <a href="" class="nav-link">Payments</a>
                         <ul class="dropdown-menu">
-                            <li><a href="" class="dropdown-item">Pay Rent</a></li>
+                            <li><a href="paymentmethod.html" class="dropdown-item">Pay Rent</a></li>
                             <li><a href="paymenthistory.html" class="dropdown-item">Payment History</a></li>
                             <li><a href="autopay.html" class="dropdown-item">Set Up Auto Pay</a></li>
                         </ul>
@@ -1023,7 +1023,7 @@
                             <div class="property-location">
                                 <i class="fas fa-map-marker-alt"></i> Kisumu-Maseno Road
                             </div>
-                            <div class="property-price">$1,200/month</div>
+                            <div class="property-price">KES 22,200/month</div>
                             <div class="property-amenities">
                                 <span class="amenity">2 Beds</span>
                                 <span class="amenity">1 Bath</span>
@@ -1040,7 +1040,7 @@
                             <div class="property-location">
                                 <i class="fas fa-map-marker-alt"></i> Milimani Estate
                             </div>
-                            <div class="property-price">$1,800/month</div>
+                            <div class="property-price">KES 30,800/month</div>
                             <div class="property-amenities">
                                 <span class="amenity">3 Beds</span>
                                 <span class="amenity">2 Baths</span>
@@ -1057,7 +1057,7 @@
                             <div class="property-location">
                                 <i class="fas fa-map-marker-alt"></i> CBD Area
                             </div>
-                            <div class="property-price">$850/month</div>
+                            <div class="property-price">KES 40,850/month</div>
                             <div class="property-amenities">
                                 <span class="amenity">1 Bed</span>
                                 <span class="amenity">1 Bath</span>
